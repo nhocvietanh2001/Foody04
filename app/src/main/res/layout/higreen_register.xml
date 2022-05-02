@@ -119,6 +119,7 @@
         android:background="#ffff"
         android:ems="10"
         android:hint="phone"
+        android:maxLines="1"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20dp"
@@ -144,6 +145,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtViewAddressRe" />
 
+
     <EditText
         android:id="@+id/editTxtPasswordRe"
         android:layout_width="365dp"
@@ -151,23 +153,24 @@
         android:layout_marginTop="5dp"
         android:background="#ffff"
         android:ems="10"
+        android:maxLines="1"
         android:hint="password"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@id/checkBoxDisplayPass"
+        app:layout_constraintBottom_toTopOf="@id/checkBoxPhoneExist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtViewPassWordRe" />
-
+        app:layout_constraintTop_toBottomOf="@id/txtViewPassWordRe"
+        app:passwordToggleEnabled="true" />
 
     <CheckBox
-        android:id="@+id/checkBoxDisplayPass"
+        android:id="@+id/checkBoxPhoneExist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/alatsi"
-        android:text="Display Password"
+        android:text="Check phone already exist or not"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
@@ -191,7 +194,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.532"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxDisplayPass"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxPhoneExist"
         app:rippleColor="#4CAF50" />
 
     <TextView
