@@ -8,7 +8,7 @@
         android:title="@string/action_cart"
         android:icon="@drawable/cart"/>
 
-    <item android:id="@+id/action_profile"
-        android:title="@string/action_profile"
+    <item android:id="@+id/action_setting"
+        android:title="@string/action_setting"
         android:icon="@drawable/profile"/>
 </menu>

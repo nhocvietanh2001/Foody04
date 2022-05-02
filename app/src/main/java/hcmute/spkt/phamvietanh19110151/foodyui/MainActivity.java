@@ -45,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
                 if(phone.equals("")||pass.equals("")){
                     Toast.makeText(MainActivity.this,"Please enter all fields",Toast.LENGTH_SHORT).show();
                 }else{
-                     Boolean checkuserpass = DB.checkUserAndPass(phone,pass);
-                     if(checkuserpass == true){
-                         Toast.makeText(MainActivity.this,"Login successfully!",Toast.LENGTH_SHORT).show();
-                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                         startActivity(intent);
-                     }else {
-                         Toast.makeText(MainActivity.this,"Invalid Credentials",Toast.LENGTH_SHORT).show();
-                     }
+                    Boolean checkuserpass = DB.checkUserAndPass(phone,pass);
+                    if(checkuserpass == true){
+                        Toast.makeText(MainActivity.this,"Login successfully!",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(MainActivity.this,"Invalid Credentials",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
