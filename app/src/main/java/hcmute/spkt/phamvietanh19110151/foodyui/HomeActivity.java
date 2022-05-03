@@ -11,6 +11,11 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import me.relex.circleindicator.CircleIndicator;
+
 public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
@@ -25,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         viewPager = findViewById(R.id.viewPager);
+
 
         setUpViewPager();
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -42,6 +48,8 @@ public class HomeActivity extends AppCompatActivity {
             return true;
         });
     }
+
+
 
     private void setUpViewPager() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

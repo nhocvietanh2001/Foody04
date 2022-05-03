@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#ffff"
     tools:context=".HomeFragment"
     android:orientation="vertical">
 
@@ -55,42 +55,43 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="10"
-            android:background="@color/grey"
+            android:background="#BDCCBE"
+            android:drawableRight="@drawable/ic_baseline_search_24"
             android:hint="Find what you want"
             android:textColor="@color/white"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:id="@+id/ivHomeSearch"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="15dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/magnifier" />
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Categories"
+        android:text="Welcome to HiGreen"
         android:layout_marginLeft="15dp"
         android:textColor="@color/dark_green"
-        android:textSize="25dp"
-        android:layout_marginTop="10dp"
-        />
-    <ListView
+        android:textSize="15dp"
+        android:layout_marginTop="10dp" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpagerslider"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/circle_indicator_slider"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:id="@+id/lvHomeCategories"
-        android:background="@color/green"
-        />
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:background="#DEFDBB"
+      />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Popular"
+        android:text="Category"
         android:layout_marginLeft="15dp"
         android:textColor="@color/dark_green"
         android:textSize="25dp"
@@ -99,7 +100,7 @@
         />
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="225dp"
+        android:layout_height="125dp"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
