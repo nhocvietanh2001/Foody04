@@ -11,19 +11,26 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class SettingFragment extends Fragment {
-    TextView editProfile, viewVoucher, orderStatus, logOut;
+    TextView tvCustomerName, tvEditProfile, tvViewVoucher, tvOrderStatus, tvLogOut;
+    UserLocalStore localStore;
+    User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        editProfile = view.findViewById(R.id.tvCustomerEditProfile);
-        viewVoucher = view.findViewById(R.id.tvCustomerViewVoucher);
-        orderStatus = view.findViewById(R.id.tvCustomerOrderStatus);
-        logOut = view.findViewById(R.id.tvCustomerLogout);
+        tvCustomerName = view.findViewById(R.id.tvSettingCustomerName);
+        tvEditProfile = view.findViewById(R.id.tvCustomerEditProfile);
+        tvViewVoucher = view.findViewById(R.id.tvCustomerViewVoucher);
+        tvOrderStatus = view.findViewById(R.id.tvCustomerOrderStatus);
+        tvLogOut = view.findViewById(R.id.tvCustomerLogout);
 
-        editProfile.setOnClickListener(new View.OnClickListener() {
+        localStore = new UserLocalStore(getActivity());
+        user = localStore.getUser();
+        tvCustomerName.setText("Hi, " + user.getName());
+
+        tvEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CustomerProfileActivity.class);
@@ -31,11 +38,18 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        viewVoucher.setOnClickListener(new View.OnClickListener() {
+        tvViewVoucher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), VoucherActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        tvLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
             }
         });
 

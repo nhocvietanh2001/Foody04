@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +25,23 @@ public class HomeFragment extends Fragment {
     private List<PhotoSlider> mListPhotoSlider;
     private RecyclerView rcvCate;
     private CategoryAdapter mCategoryAdapter;
+    private TextView tvCustomerName;
+    UserLocalStore localStore;
+    User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        tvCustomerName = view.findViewById(R.id.tvHomeCustomerName);
         viewPagerSlider = view.findViewById(R.id.viewpagerslider);
         circleIndicator = view.findViewById(R.id.circle_indicator_slider);
         photoSliderAdapter = new PhotoSliderAdapter(getActivity(), getListPhotoSlider());
+
+        localStore = new UserLocalStore(getActivity());
+        user = localStore.getUser();
+        tvCustomerName.setText("Hi, " + user.getName());
 
         viewPagerSlider.setAdapter(photoSliderAdapter);
         circleIndicator.setViewPager(viewPagerSlider);
@@ -46,7 +55,6 @@ public class HomeFragment extends Fragment {
 
         mCategoryAdapter.setData(getListCate());
         rcvCate.setAdapter(mCategoryAdapter);
-
 
         return view;
     }

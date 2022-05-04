@@ -11,27 +11,24 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        >
-        <ImageButton
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back"
-            android:id="@+id/btnBackCustomer"
-            />
-
+        android:orientation="vertical">
         <TextView
-            android:id="@+id/tvBackCustomer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/aclonica"
-            android:text="Customer"
+            android:text="Hi, Viet Anh"
             android:textColor="@color/green"
-            android:textSize="33dp" />
+            android:textSize="20dp"
+            android:id="@+id/tvSettingCustomerName"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order and Enjoy"
+            android:textColor="@color/green"
+            android:textSize="20dp"
+            android:layout_marginLeft="15dp"/>
     </LinearLayout>
-
     <TextView
         android:id="@+id/tvCustomerEditProfile"
         android:layout_width="wrap_content"
