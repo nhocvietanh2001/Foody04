@@ -3,6 +3,8 @@ package hcmute.spkt.phamvietanh19110151.foodyui;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -19,6 +21,9 @@ public class HomeFragment extends Fragment {
     private ViewPager viewPager, viewPagerSlider;
     private CircleIndicator circleIndicator;
     private PhotoSliderAdapter photoSliderAdapter;
+    private List<PhotoSlider> mListPhotoSlider;
+    private RecyclerView rcvCate;
+    private CategoryAdapter mCategoryAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,8 +38,29 @@ public class HomeFragment extends Fragment {
         circleIndicator.setViewPager(viewPagerSlider);
         photoSliderAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
 
+        rcvCate = view.findViewById(R.id.rcvCate);
+        mCategoryAdapter = new CategoryAdapter(getActivity());
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),4);
+        rcvCate.setLayoutManager(gridLayoutManager);
+
+        mCategoryAdapter.setData(getListCate());
+        rcvCate.setAdapter(mCategoryAdapter);
+
+
         return view;
     }
+
+    private List<Category> getListCate(){
+        List<Category> list = new ArrayList<>();
+        list.add(new Category(R.drawable.dryfood, "Dry food"));
+        list.add(new Category(R.drawable.soup, "Soup"));
+        list.add(new Category(R.drawable.salad, "Salad"));
+        list.add(new Category(R.drawable.drink, "Drink"));
+
+        return list;
+    }
+
     private List<PhotoSlider> getListPhotoSlider(){
         List<PhotoSlider> list = new ArrayList<>();
         //
