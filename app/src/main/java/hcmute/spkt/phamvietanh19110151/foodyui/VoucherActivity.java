@@ -2,15 +2,23 @@ package hcmute.spkt.phamvietanh19110151.foodyui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class VoucherActivity extends AppCompatActivity {
 
     ImageButton btnBack;
+    ListView lvVoucher;
+    VoucherAdapter adapter;
+    ArrayList<Voucher> arrayVoucher;
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +34,20 @@ public class VoucherActivity extends AppCompatActivity {
                 finish();
             }
         });
+        lvVoucher = findViewById(R.id.lvCustomerVouchers);
+        arrayVoucher = new ArrayList<>();
+        adapter = new VoucherAdapter(this, R.layout.fragment_voucher, arrayVoucher);
+        lvVoucher.setAdapter(adapter);
+        DB = new DBHelper(this);
 
+        Cursor voucherData = DB.getVouchers();
+        while (voucherData.moveToNext()) {
+            String name = voucherData.getString(1);
+            String type = voucherData.getString(2);
+            int amount = voucherData.getInt(3);
+            arrayVoucher.add(new Voucher(name, type, amount));
+        }
+
+        adapter.notifyDataSetChanged();
     }
 }

@@ -58,7 +58,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
                 String pass = etPass.getText().toString();
                 user = new User(phone, name, pass, address);
                 
-                if (DB.updateData(user)) {
+                if (DB.updateUser(user)) {
                     Toast.makeText(CustomerProfileActivity.this, "Updated successfully!", Toast.LENGTH_SHORT).show();
                     localStore.storeUser(user);
                 }

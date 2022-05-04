@@ -49,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
             uPass.setText(user.getPass());
             cbRemember.setChecked(localStore.getRemember());
         }
-
+        /*DB.exec("create Table vouchers(vid INTEGER primary key, vname TEXT, vtype TEXT, vamount INTEGER)");
+        DB.insertVoucher(1, new Voucher("50% OFF", "percent", 50));
+        DB.insertVoucher(2, new Voucher("25% OFF", "percent", 25));
+        DB.insertVoucher(3, new Voucher("10.000 VND OFF", "VND", 10000));
+        DB.updateVoucher(3, new Voucher("10.000 VND", "VND", 10000));*/
         //
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override

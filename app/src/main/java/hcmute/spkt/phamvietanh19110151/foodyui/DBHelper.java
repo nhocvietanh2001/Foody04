@@ -23,11 +23,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
-
         MyDB.execSQL("drop Table if exists users");
     }
 
-    public Boolean insertData(User user) {
+    public Boolean insertUser(User user) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("uphone", user.getPhone());
@@ -41,7 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public Boolean updateData(User user) {
+    public Boolean updateUser(User user) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("uname", user.getName());
@@ -51,6 +50,36 @@ public class DBHelper extends SQLiteOpenHelper {
         if (result > 0)
             return true;
         return false;
+    }
+
+    public void insertVoucher(int id, Voucher voucher) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("vid", id);
+        contentValues.put("vname", voucher.getName());
+        contentValues.put("vtype", voucher.getType());
+        contentValues.put("vamount", voucher.getAmount());
+        MyDB.insert("vouchers", null, contentValues);
+    }
+
+    public void updateVoucher(int id, Voucher voucher) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("vid", id);
+        contentValues.put("vname", voucher.getName());
+        contentValues.put("vtype", voucher.getType());
+        contentValues.put("vamount", voucher.getAmount());
+        MyDB.update("vouchers", contentValues, "vid = ?", new String[] {Integer.toString(id)});
+    }
+
+    public void exec(String sql) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        MyDB.execSQL(sql);
+    }
+
+    public Cursor getVouchers() {
+        SQLiteDatabase MyDB = this.getReadableDatabase();
+        return MyDB.rawQuery("SELECT * FROM vouchers", null);
     }
 
     public Cursor getUserWithPhone(String phone) {

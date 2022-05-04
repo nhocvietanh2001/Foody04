@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Boolean checkExistPhone = DB.checkExistPhone(phone);
                     if (checkExistPhone == false) {
                         user = new User(phone, name, pass, address);
-                        Boolean insert = DB.insertData(user);
+                        Boolean insert = DB.insertUser(user);
                         if (insert == true) {
                             Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                             localStore.storeUser(user);
