@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.UserLocalStore;
+
 public class RegisterActivity extends AppCompatActivity {
 
     EditText uNameRe, uPhoneRe, uPassRe, uAddressRe;

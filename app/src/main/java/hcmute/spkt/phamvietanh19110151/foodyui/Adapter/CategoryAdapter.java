@@ -1,4 +1,4 @@
-package hcmute.spkt.phamvietanh19110151.foodyui;
+package hcmute.spkt.phamvietanh19110151.foodyui.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Category;
+import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>{
 

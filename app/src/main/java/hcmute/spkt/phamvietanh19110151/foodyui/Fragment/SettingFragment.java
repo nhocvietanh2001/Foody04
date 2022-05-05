@@ -1,4 +1,4 @@
-package hcmute.spkt.phamvietanh19110151.foodyui;
+package hcmute.spkt.phamvietanh19110151.foodyui.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import hcmute.spkt.phamvietanh19110151.foodyui.CustomerProfileActivity;
+import hcmute.spkt.phamvietanh19110151.foodyui.R;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.UserLocalStore;
+import hcmute.spkt.phamvietanh19110151.foodyui.VoucherActivity;
 
 public class SettingFragment extends Fragment {
     TextView tvCustomerName, tvEditProfile, tvViewVoucher, tvOrderStatus, tvLogOut;

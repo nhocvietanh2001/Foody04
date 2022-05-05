@@ -1,4 +1,4 @@
-package hcmute.spkt.phamvietanh19110151.foodyui;
+package hcmute.spkt.phamvietanh19110151.foodyui.Model;
 
 public class Voucher {
     private String name;

@@ -1,7 +1,6 @@
-package hcmute.spkt.phamvietanh19110151.foodyui;
+package hcmute.spkt.phamvietanh19110151.foodyui.Adapter;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,10 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.HomeFragment;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.PhotoSlider;
+import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
 public class PhotoSliderAdapter extends PagerAdapter {
 

@@ -1,10 +1,14 @@
-package hcmute.spkt.phamvietanh19110151.foodyui;
+package hcmute.spkt.phamvietanh19110151.foodyui.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.CartFragment;
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.HomeFragment;
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.SettingFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {

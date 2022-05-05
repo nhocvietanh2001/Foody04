@@ -1,4 +1,4 @@
-package hcmute.spkt.phamvietanh19110151.foodyui;
+package hcmute.spkt.phamvietanh19110151.foodyui.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,9 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
+
+import hcmute.spkt.phamvietanh19110151.foodyui.R;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Voucher;
 
 public class VoucherAdapter extends BaseAdapter {
 

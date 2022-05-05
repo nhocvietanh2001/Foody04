@@ -1,4 +1,4 @@
-package hcmute.spkt.phamvietanh19110151.foodyui;
+package hcmute.spkt.phamvietanh19110151.foodyui.Fragment;
 
 import android.os.Bundle;
 
@@ -15,6 +15,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Category;
+import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.CategoryAdapter;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.PhotoSlider;
+import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.PhotoSliderAdapter;
+import hcmute.spkt.phamvietanh19110151.foodyui.R;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.UserLocalStore;
 import me.relex.circleindicator.CircleIndicator;
 
 public class HomeFragment extends Fragment {

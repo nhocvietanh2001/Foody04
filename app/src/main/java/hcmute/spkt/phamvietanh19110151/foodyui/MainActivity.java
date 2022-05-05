@@ -3,7 +3,6 @@ package hcmute.spkt.phamvietanh19110151.foodyui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +13,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.UserLocalStore;
 
 public class MainActivity extends AppCompatActivity {
 

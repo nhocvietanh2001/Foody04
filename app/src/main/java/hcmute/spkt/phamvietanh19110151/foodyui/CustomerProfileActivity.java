@@ -11,6 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.UserLocalStore;
+
 public class CustomerProfileActivity extends AppCompatActivity {
 
     EditText etName, etPhone, etAddress, etPass;

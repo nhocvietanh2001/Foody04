@@ -7,14 +7,10 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import me.relex.circleindicator.CircleIndicator;
+import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.ViewPagerAdapter;
 
 public class HomeActivity extends AppCompatActivity {
 
