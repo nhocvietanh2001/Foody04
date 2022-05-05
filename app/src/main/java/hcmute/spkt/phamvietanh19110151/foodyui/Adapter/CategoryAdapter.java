@@ -20,8 +20,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private Context mContext;
     List<Category> mCate;
 
-    public CategoryAdapter(Context mContext) {
-        this.mContext = mContext;
+    public CategoryAdapter() {
+
     }
 
     public void setData(List<Category> list){

@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.CartFragment;
 import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.HomeFragment;
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.RestaurantFragment;
 import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.SettingFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -23,9 +24,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 return new HomeFragment();
 
             case 1:
-                return new CartFragment();
+                return new RestaurantFragment();
 
             case 2:
+                return new CartFragment();
+
+            case 3:
                 return new SettingFragment();
 
             default:
@@ -35,7 +39,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @Nullable
@@ -47,9 +51,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 title = "Home";
                 break;
             case 1:
-                title = "Cart";
+                title = "Restaurant and Food";
                 break;
             case 2:
+                title = "Cart";
+                break;
+            case 3:
                 title = "Setting";
                 break;
         }

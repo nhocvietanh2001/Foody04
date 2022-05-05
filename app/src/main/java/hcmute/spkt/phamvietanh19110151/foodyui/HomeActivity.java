@@ -34,11 +34,14 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.action_home:
                     viewPager.setCurrentItem(0);
                     break;
-                case R.id.action_cart:
+                case R.id.action_restaurant:
                     viewPager.setCurrentItem(1);
                     break;
-                case R.id.action_setting:
+                case R.id.action_cart:
                     viewPager.setCurrentItem(2);
+                    break;
+                case R.id.action_setting:
+                    viewPager.setCurrentItem(3);
                     break;
             }
             return true;
@@ -64,9 +67,12 @@ public class HomeActivity extends AppCompatActivity {
                         bottomNavigationView.getMenu().findItem(R.id.action_home).setChecked(true);
                         break;
                     case 1:
-                        bottomNavigationView.getMenu().findItem(R.id.action_cart).setChecked(true);
+                        bottomNavigationView.getMenu().findItem(R.id.action_restaurant).setChecked(true);
                         break;
                     case 2:
+                        bottomNavigationView.getMenu().findItem(R.id.action_cart).setChecked(true);
+                        break;
+                    case 3:
                         bottomNavigationView.getMenu().findItem(R.id.action_setting).setChecked(true);
                         break;
                 }

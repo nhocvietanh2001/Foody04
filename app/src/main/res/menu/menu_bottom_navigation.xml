@@ -4,6 +4,10 @@
         android:title="@string/action_home"
         android:icon="@drawable/home"/>
 
+    <item android:id="@+id/action_restaurant"
+        android:title="@string/action_restaurant"
+        android:icon="@drawable/restaurant"/>
+
     <item android:id="@+id/action_cart"
         android:title="@string/action_cart"
         android:icon="@drawable/cart"/>

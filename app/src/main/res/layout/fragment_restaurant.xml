@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffff"
+    tools:context=".Fragment.RestaurantFragment"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:layout_marginTop="100dp"
+        >
+
+        <EditText
+            android:id="@+id/etHomeSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="10"
+            android:background="#BDCCBE"
+            android:drawableRight="@drawable/ic_baseline_search_24"
+            android:hint="Find what you want"
+            android:textColor="@color/white"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/dark_green"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:padding="2dp"
+        android:id="@+id/rcvRestaurant"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dishes"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/dark_green"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:padding="2dp"
+        android:id="@+id/rcvDishes"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

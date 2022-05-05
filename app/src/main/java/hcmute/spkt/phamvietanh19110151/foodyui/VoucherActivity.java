@@ -13,6 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.VoucherAdapter;
+import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Voucher;
 
@@ -22,7 +23,7 @@ public class VoucherActivity extends AppCompatActivity {
     ListView lvVoucher;
     VoucherAdapter adapter;
     ArrayList<Voucher> arrayVoucher;
-    DBHelper DB;
+    DBFoody DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class VoucherActivity extends AppCompatActivity {
         arrayVoucher = new ArrayList<>();
         adapter = new VoucherAdapter(this, R.layout.fragment_voucher, arrayVoucher);
         lvVoucher.setAdapter(adapter);
-        DB = new DBHelper(this);
+        DB = new DBFoody(this);
 
         Cursor voucherData = DB.getVouchers();
         while (voucherData.moveToNext()) {

@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
         photoSliderAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
 
         rcvCate = view.findViewById(R.id.rcvCate);
-        mCategoryAdapter = new CategoryAdapter(getActivity());
+        mCategoryAdapter = new CategoryAdapter();
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),4);
         rcvCate.setLayoutManager(gridLayoutManager);
@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
         List<Category> list = new ArrayList<>();
         list.add(new Category(R.drawable.dryfood, "Dry food"));
         list.add(new Category(R.drawable.soup, "Soup"));
-        list.add(new Category(R.drawable.salad, "Salad"));
+        list.add(new Category(R.drawable.salad, "Dessert"));
         list.add(new Category(R.drawable.drink, "Drink"));
 
         return list;
