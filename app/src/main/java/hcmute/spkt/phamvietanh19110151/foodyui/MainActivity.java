@@ -15,8 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Restaurant;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.UserLocalStore;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Voucher;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,11 +54,6 @@ public class MainActivity extends AppCompatActivity {
             uPass.setText(user.getPass());
             cbRemember.setChecked(localStore.getRemember());
         }
-        /*DB.exec("create Table vouchers(vid INTEGER primary key, vname TEXT, vtype TEXT, vamount INTEGER)");
-        DB.insertVoucher(1, new Voucher("50% OFF", "percent", 50));
-        DB.insertVoucher(2, new Voucher("25% OFF", "percent", 25));
-        DB.insertVoucher(3, new Voucher("10.000 VND OFF", "VND", 10000));
-        DB.updateVoucher(3, new Voucher("10.000 VND", "VND", 10000));*/
         //
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     if(DB.checkUserAndPass(phone,pass)){
                         Toast.makeText(MainActivity.this,"Login successfully!",Toast.LENGTH_SHORT).show();
+                        initializeDatabase();
                         Cursor userCursor = DB.getUserWithPhone(phone);
                         while (userCursor.moveToNext()) {
                             String name = userCursor.getString(1);
@@ -95,6 +93,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void initializeDatabase() {
+        DB.exec("drop Table if exists vouchers");
+        DB.exec("create Table vouchers(vid INTEGER primary key, vname TEXT, vtype TEXT, vamount INTEGER)");
+        DB.insertVoucher(1, new Voucher("50% OFF", "percent", 50));
+        DB.insertVoucher(2, new Voucher("25% OFF", "percent", 25));
+        DB.insertVoucher(3, new Voucher("10.000 VND", "VND", 10000));
+        DB.insertVoucher(4, new Voucher("20.000 VND", "VND", 20000));
+        //DB.updateVoucher(3, new Voucher("10.000 VND", "VND", 10000));
+
+        DB.exec("drop Table if exists restaurants");
+        DB.exec("create Table restaurants(rid INTEGER primary key, rname TEXT, raddress TEXT, rphone TEXT)");
+        DB.insertRestaurant(1, new Restaurant("Highland", "Di An, Binh Duong", "0123456789"));
+        DB.insertRestaurant(2, new Restaurant("Cua Ngon", "Di An, Binh Duong", "0123456789"));
+        DB.insertRestaurant(3, new Restaurant("Sushi bar", "Di An, Binh Duong", "0123456789"));
+        DB.insertRestaurant(4, new Restaurant("Bun Cha", "Di An, Binh Duong", "0123456789"));
+        DB.insertRestaurant(5, new Restaurant("Ong Tay", "Di An, Binh Duong", "0123456789"));
+        DB.insertRestaurant(6, new Restaurant("Pho Nuong", "Di An, Binh Duong", "0123456789"));
 
 
     }

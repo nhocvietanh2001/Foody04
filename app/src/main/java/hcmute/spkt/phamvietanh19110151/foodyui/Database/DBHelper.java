@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Restaurant;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Voucher;
 
@@ -68,11 +69,19 @@ public class DBHelper extends SQLiteOpenHelper {
     public void updateVoucher(int id, Voucher voucher) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("vid", id);
         contentValues.put("vname", voucher.getName());
         contentValues.put("vtype", voucher.getType());
         contentValues.put("vamount", voucher.getAmount());
         MyDB.update("vouchers", contentValues, "vid = ?", new String[] {Integer.toString(id)});
+    }
+
+    public void insertRestaurant(int id, Restaurant restaurant) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("rname", restaurant.getName());
+        contentValues.put("raddress", restaurant.getAddress());
+        contentValues.put("rphone", restaurant.getPhone());
+        MyDB.insert("restaurants",null, contentValues);
     }
 
     public void exec(String sql) {
