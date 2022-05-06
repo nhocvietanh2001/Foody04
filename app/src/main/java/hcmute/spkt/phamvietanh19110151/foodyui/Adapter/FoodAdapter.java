@@ -43,6 +43,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             return;
         }
         holder.tvFood.setText(food.getName());
+        holder.tvPrice.setText(Integer.toString(food.getPrice()));
         holder.imgFood.setImageBitmap(food.getImageBitmap());
     }
 
@@ -54,13 +55,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public class FoodViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView imgFood;
-        private TextView tvFood;
+        private TextView tvFood, tvPrice;
 
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgFood = itemView.findViewById(R.id.imgFood);
             tvFood = itemView.findViewById(R.id.tvFoodName);
+            tvPrice = itemView.findViewById(R.id.tvFoodPrice);
         }
     }
 }

@@ -8,11 +8,21 @@ public class Food {
     private String name;
     private String category;
     private byte[] image;
+    private int price;
 
-    public Food(String name, String category, byte[] image) {
+    public Food(String name, String category, int price, byte[] image) {
         this.name = name;
         this.category = category;
+        this.price = price;
         this.image = image;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getName() {

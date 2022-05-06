@@ -80,8 +80,9 @@ public class RestaurantFragment extends Fragment {
                 while(foodCursor.moveToNext()) {
                     String fname = foodCursor.getString(1);
                     String fcategory = foodCursor.getString(2);
-                    byte[] image = foodCursor.getBlob(4);
-                    foods.add(new Food(fname, fcategory, image));
+                    int fprice = foodCursor.getInt(3);
+                    byte[] image = foodCursor.getBlob(5);
+                    foods.add(new Food(fname, fcategory, fprice, image));
                 }
                 LinearLayoutManager linearLayout2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                 rcvDishes.setLayoutManager(linearLayout2);

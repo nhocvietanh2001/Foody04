@@ -60,6 +60,7 @@ public class DBFoody extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("fname", food.getName());
         contentValues.put("fcategory", food.getCategory());
+        contentValues.put("fprice", food.getPrice());
         contentValues.put("fimage", food.getImage());
         contentValues.put("fid", fid);
         contentValues.put("rid", rid);

@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     if(DB.checkUserAndPass(phone,pass)){
                         Toast.makeText(MainActivity.this,"Login successfully!",Toast.LENGTH_SHORT).show();
-                        //initializeDatabase();
+                        initializeDatabase();
                         Cursor userCursor = DB.getUserWithPhone(phone);
                         while (userCursor.moveToNext()) {
                             String name = userCursor.getString(1);
@@ -122,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
         DBfoody.insertVoucher(4, new Voucher("20.000 VND", "VND", 20000));
         //DB.updateVoucher(3, new Voucher("10.000 VND", "VND", 10000));
 
-        DB.exec("drop Table if exists restaurants");
+
+        //them nha hang
         DBfoody.exec("drop Table if exists restaurants");
         DBfoody.exec("create Table restaurants(rid INTEGER primary key, rname TEXT, raddress TEXT, rphone TEXT)");
         DBfoody.insertRestaurant(new Restaurant(1,"Vegetarian Pro", "Di An, Binh Duong", "0123456789"));
@@ -132,12 +133,32 @@ public class MainActivity extends AppCompatActivity {
         DBfoody.insertRestaurant(new Restaurant(5,"Giac Duyen", "Di An, Binh Duong", "0123456789"));
         DBfoody.insertRestaurant(new Restaurant(6,"Huong Sen", "Di An, Binh Duong", "0123456789"));
 
+
+        //them mon an
         DBfoody.exec("drop Table if exists foods");
-        DBfoody.exec("create Table foods(fid INTEGER primary key, fname TEXT, fcategory TEXT, rid TEXT, fimage BLOB)");
-        DBfoody.insertFood(1, new Food("Com dau hu", "Dry food", toByteArray(R.drawable.comdauhu)), 1);
-        DBfoody.insertFood(2, new Food("Canh dau hu", "Soup", toByteArray(R.drawable.canhdauhu)), 1);
-        DBfoody.insertFood(3, new Food("Chuoi", "Dessert", toByteArray(R.drawable.chuoi)), 1);
-        DBfoody.insertFood(4, new Food("Rau ma", "Drink", toByteArray(R.drawable.rauma)), 1);
+        DBfoody.exec("create Table foods(fid INTEGER primary key, fname TEXT, fcategory TEXT, fprice TEXT, rid TEXT, fimage BLOB)");
+        //nha hang 1
+        DBfoody.insertFood(1, new Food("Cơm đậu hủ", "Dry food", 18000, toByteArray(R.drawable.comdauhu)), 1);
+        DBfoody.insertFood(2, new Food("Canh dau hu", "Soup", 1800, toByteArray(R.drawable.canhdauhu)), 1);
+        DBfoody.insertFood(3, new Food("Chuoi", "Dessert", 180, toByteArray(R.drawable.chuoi)), 1);
+        DBfoody.insertFood(4, new Food("Rau ma", "Drink", 18, toByteArray(R.drawable.rauma)), 1);
+        //nha hang 2
+
+        //nha hang 3
+
+        //nha hang 4
+
+        //nha hang 5
+
+        //nha hang 6
+
+        //nha hang 7
+
+        //nha hang 8
+
+        //nha hang 9
+
+        //nha hang 10
 
     }
 
