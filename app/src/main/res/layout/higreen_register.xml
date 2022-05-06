@@ -170,6 +170,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/alatsi"
+        android:visibility="invisible"
         android:text="Check phone already exist or not"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@id/btnRegister"

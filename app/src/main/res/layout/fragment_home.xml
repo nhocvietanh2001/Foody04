@@ -3,81 +3,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D2F8D3"
+    android:background="#EBF6EB"
     tools:context=".Fragment.HomeFragment"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="86dp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hi, Viet Anh"
-                android:textColor="@color/green"
-                android:textSize="20dp"
                 android:id="@+id/tvHomeCustomerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:text="Hi, Viet Anh"
+                android:textColor="@color/dark_green"
+                android:textSize="20dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="Order and Enjoy"
-                android:textColor="@color/green"
-                android:textSize="20dp"
-                android:layout_marginLeft="15dp"/>
+                android:textColor="@color/dark_green"
+                android:textSize="20dp" />
         </LinearLayout>
+
         <View
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
+
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/higreen"
+            android:layout_gravity="right"
             android:layout_marginRight="15dp"
-            android:layout_gravity="right"/>
+            android:src="@drawable/higreen" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="10"
-        >
+        android:weightSum="10">
 
-        <EditText
-            android:id="@+id/etHomeSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="10"
-            android:background="#BDCCBE"
-            android:drawableRight="@drawable/ic_baseline_search_24"
-            android:hint="Find what you want"
-            android:textColor="@color/white"
-            android:textColorHint="@color/black"
-            android:textSize="16sp"
-            tools:ignore="TouchTargetSizeCheck" />
+      <ImageView
+          android:layout_width="match_parent"
+          android:background="@color/very_dark_green"
+          android:layout_height="5dp"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome to HiGreen"
-        android:layout_marginLeft="15dp"
+
+        android:layout_gravity="center"
+        android:fontFamily="@font/aclonica"
         android:textColor="@color/dark_green"
-        android:textSize="15dp"
+        android:textSize="20sp"
         android:layout_marginTop="10dp" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpagerslider"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="240dp"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <me.relex.circleindicator.CircleIndicator
@@ -85,13 +80,19 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:background="#DEFDBB"
       />
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:background="@color/very_dark_green"
+        android:layout_height="5dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Category"
+        android:fontFamily="@font/alatsi"
         android:layout_marginLeft="15dp"
         android:textColor="@color/dark_green"
         android:textSize="25dp"
@@ -100,6 +101,7 @@
         />
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
+
        android:padding="2dp"
        android:id="@+id/rcvCate"
        android:layout_marginTop="10dp"

@@ -10,5 +10,6 @@
     <color name="green">#426F24</color>
     <color name="light_green">#40F262</color>
     <color name="dark_green">#385723</color>
+    <color name="very_dark_green">#0C1B02</color>
     <color name="grey">#AFABAB</color>
 </resources>

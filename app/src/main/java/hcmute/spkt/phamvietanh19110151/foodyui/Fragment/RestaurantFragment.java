@@ -87,8 +87,15 @@ public class RestaurantFragment extends Fragment {
                 LinearLayoutManager linearLayout2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                 rcvDishes.setLayoutManager(linearLayout2);
 
+                //foodAdapter.setFoods(foods);
+                //rcvDishes.setAdapter(foodAdapter);
+
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+                rcvDishes.setLayoutManager(gridLayoutManager);
                 foodAdapter.setFoods(foods);
                 rcvDishes.setAdapter(foodAdapter);
+
+
             }
         }, new IntentFilter("restaurant"));
 

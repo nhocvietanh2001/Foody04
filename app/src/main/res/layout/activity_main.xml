@@ -19,7 +19,7 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/bottomNavigationBar"
         app:menu="@menu/menu_bottom_navigation"
-        app:itemBackground="@color/dark_green"
+        app:itemBackground="@color/very_dark_green"
         app:itemIconTint="@color/custom_color_bottom_nav"
         app:itemTextColor="@color/custom_color_bottom_nav"
         app:layout_constraintTop_toBottomOf="@+id/viewPager"

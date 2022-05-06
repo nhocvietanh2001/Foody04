@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Category;
 import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.CategoryAdapter;
@@ -29,10 +33,12 @@ public class HomeFragment extends Fragment {
     private ViewPager viewPager, viewPagerSlider;
     private CircleIndicator circleIndicator;
     private PhotoSliderAdapter photoSliderAdapter;
-    private List<PhotoSlider> mListPhotoSlider;
     private RecyclerView rcvCate;
     private CategoryAdapter mCategoryAdapter;
     private TextView tvCustomerName;
+    private List<PhotoSlider> mListPhotoSld;
+    private Timer mTimer;
+
     UserLocalStore localStore;
     User user;
 
@@ -44,7 +50,8 @@ public class HomeFragment extends Fragment {
         tvCustomerName = view.findViewById(R.id.tvHomeCustomerName);
         viewPagerSlider = view.findViewById(R.id.viewpagerslider);
         circleIndicator = view.findViewById(R.id.circle_indicator_slider);
-        photoSliderAdapter = new PhotoSliderAdapter(getActivity(), getListPhotoSlider());
+        mListPhotoSld = getListPhotoSlider();
+        photoSliderAdapter = new PhotoSliderAdapter(getActivity(), mListPhotoSld);
 
         localStore = new UserLocalStore(getActivity());
         user = localStore.getUser();
@@ -55,6 +62,7 @@ public class HomeFragment extends Fragment {
         photoSliderAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
 
         rcvCate = view.findViewById(R.id.rcvCate);
+
         mCategoryAdapter = new CategoryAdapter();
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),4);
@@ -62,6 +70,8 @@ public class HomeFragment extends Fragment {
 
         mCategoryAdapter.setData(getListCate());
         rcvCate.setAdapter(mCategoryAdapter);
+
+        autoSlideImage();
 
         return view;
     }
@@ -75,7 +85,7 @@ public class HomeFragment extends Fragment {
 
         return list;
     }
-
+    //banner slider
     private List<PhotoSlider> getListPhotoSlider(){
         List<PhotoSlider> list = new ArrayList<>();
         //
@@ -83,7 +93,43 @@ public class HomeFragment extends Fragment {
         list.add(new PhotoSlider(R.drawable.banner2));
         list.add(new PhotoSlider(R.drawable.banner3));
         list.add(new PhotoSlider(R.drawable.banner4));
+        list.add(new PhotoSlider(R.drawable.banner5));
         //
         return list;
+    }
+    private void autoSlideImage(){
+        if(mListPhotoSld == null||mListPhotoSld.isEmpty()||viewPagerSlider == null){
+            return;
+        }
+        //Init
+        if(mTimer == null){
+            mTimer = new Timer();
+        }
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int currentItem = viewPagerSlider.getCurrentItem();
+                        int totalItem = mListPhotoSld.size() - 1;
+                        if (currentItem<totalItem){
+                            currentItem++;
+                            viewPagerSlider.setCurrentItem(currentItem);
+                        }
+                        else viewPagerSlider.setCurrentItem(0);
+                    }
+                });
+            }
+        },1000,3000);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mTimer != null){
+            mTimer.cancel();
+            mTimer = null;
+        }
     }
 }
