@@ -1,9 +1,14 @@
 package hcmute.spkt.phamvietanh19110151.foodyui.Fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -20,8 +25,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.FoodAdapter;
+import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Category;
 import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.CategoryAdapter;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.PhotoSlider;
 import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.PhotoSliderAdapter;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
@@ -38,6 +46,11 @@ public class HomeFragment extends Fragment {
     private TextView tvCustomerName;
     private List<PhotoSlider> mListPhotoSld;
     private Timer mTimer;
+    private RecyclerView rcvDishesHome;
+    private FoodAdapter foodAdapter;
+    TextView tvDishes;
+    List<Food> foods;
+    DBFoody MyDB;
     Context context;
 
     UserLocalStore localStore;
@@ -51,6 +64,8 @@ public class HomeFragment extends Fragment {
         tvCustomerName = view.findViewById(R.id.tvHomeCustomerName);
         viewPagerSlider = view.findViewById(R.id.viewpagerslider);
         circleIndicator = view.findViewById(R.id.circle_indicator_slider);
+        rcvDishesHome = view.findViewById(R.id.rcvDishesHome);
+        tvDishes = view.findViewById(R.id.tvDishes);
         mListPhotoSld = getListPhotoSlider();
         photoSliderAdapter = new PhotoSliderAdapter(getActivity(), mListPhotoSld);
 
@@ -74,6 +89,34 @@ public class HomeFragment extends Fragment {
         rcvCate.setAdapter(mCategoryAdapter);
 
         autoSlideImage();
+
+        MyDB = new DBFoody(getActivity());
+        foods = new ArrayList<>();
+        foodAdapter = new FoodAdapter(getActivity());
+
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String category = intent.getStringExtra("category");
+                Cursor foodCursor = MyDB.getFoodsWithCategory(category);
+                while(foodCursor.moveToNext()) {
+                    String fname = foodCursor.getString(1);
+                    String fcategory = foodCursor.getString(2);
+                    int fprice = foodCursor.getInt(3);
+                    byte[] image = foodCursor.getBlob(5);
+                    foods.add(new Food(fname, fcategory, fprice, image));
+                }
+
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+                rcvDishesHome.setLayoutManager(gridLayoutManager);
+                foodAdapter.setFoods(foods);
+                foods = new ArrayList<>();
+                rcvDishesHome.setAdapter(foodAdapter);
+                //tvDishes.setVisibility(View.VISIBLE);
+                //rcvDishesHome.setVisibility(View.VISIBLE);
+
+            }
+        }, new IntentFilter("category"));
 
         return view;
     }

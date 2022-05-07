@@ -1,6 +1,7 @@
 package hcmute.spkt.phamvietanh19110151.foodyui.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -59,7 +61,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.layoutCate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((HomeActivity)mContext).moveToRestaurant();
+                Intent intent = new Intent("category");
+                intent.putExtra("category", cate.getTitle());
+                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
             }
         });
 
