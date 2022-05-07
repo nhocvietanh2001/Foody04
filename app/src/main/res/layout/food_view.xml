@@ -1,83 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layoutFoodView"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="#FFFFFF"
+    tools:ignore="InvalidId">
+    <ImageView
+        android:src="@drawable/f21"
+        android:scaleType="centerCrop"
+        android:id="@+id/imgFood"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:background="@color/very_dark_green"
+        android:layout_height="3dp"/>
+
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        >
-        <ImageButton
-            android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/back"
-            android:id="@+id/btnBackFoodName"
-            />
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:text="Name:"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tvBackFoodName"
+            android:id="@+id/tvFoodName_bs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/aclonica"
-            android:text="Food Name"
-            android:textColor="@color/green"
-            android:textSize="33dp" />
+            android:layout_gravity="left"
+            android:layout_marginTop="5dp"
+            android:text="Tôm chiên chay"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:text="Restaurant:"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tvFoodRestaurant_bs"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="5dp"
+            android:text="Nhà hàng chay"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:text="Price:"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvFoodPrice_bs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="20000 vnd"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvFoodPriceFoodView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/alatsi"
-        android:text="15000 VND"
-        android:textColor="@color/black"
-        android:textSize="30dp" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:background="@color/very_dark_green"
+        android:layout_height="3dp"/>
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/food"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        app:shapeAppearanceOverlay="@style/circularImage"/>
+
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp">
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnAddToCart_bs"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/alatsi"
+            android:text="Add to cart"
+            android:textStyle="bold"
+            android:textColor="@color/very_dark_green"
+            android:textSize="20dp"
+            tools:ignore="Suspicious0dp" />
 
+        <Button
+            android:id="@+id/btnCancel_bs"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:backgroundTint="#808880"
+            android:fontFamily="@font/alatsi"
+            android:text="Cancel"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvFoodDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/alatsi"
-        android:text="Description"
-        android:textColor="@color/black"
-        android:textSize="30dp" />
-
-    <Button
-        android:id="@+id/btnAddToCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/addtocartbtnborder"
-        android:fontFamily="@font/alatsi"
-        android:text="Add to cart"
-        android:textStyle="bold"
-        android:textColor="@color/green"
-        android:textSize="30dp" />
 
 </LinearLayout>

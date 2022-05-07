@@ -1,17 +1,23 @@
 package hcmute.spkt.phamvietanh19110151.foodyui.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.RestaurantFragment;
+import hcmute.spkt.phamvietanh19110151.foodyui.MainActivity;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
@@ -45,7 +51,20 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.tvFood.setText(food.getName());
         holder.tvPrice.setText(Integer.toString(food.getPrice())+" vnd");
         holder.imgFood.setImageBitmap(food.getImageBitmap());
+        holder.layoutFoodView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //
+                //
+                //
+                //
+            }
+        });
+
+
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -56,6 +75,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
         private ImageView imgFood;
         private TextView tvFood, tvPrice;
+        private LinearLayout layoutFoodView;
 
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +83,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             imgFood = itemView.findViewById(R.id.imgFood);
             tvFood = itemView.findViewById(R.id.tvFoodName);
             tvPrice = itemView.findViewById(R.id.tvFoodPrice);
+            layoutFoodView = itemView.findViewById(R.id.layoutFood_ls);
         }
     }
 }
