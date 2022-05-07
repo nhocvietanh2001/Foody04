@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import hcmute.spkt.phamvietanh19110151.foodyui.HomeActivity;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Category;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
@@ -20,8 +22,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private Context mContext;
     List<Category> mCate;
 
-    public CategoryAdapter() {
-
+    public CategoryAdapter(Context context) {
+        this.mContext = context;
     }
 
     public void setData(List<Category> list){
@@ -54,6 +56,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
         holder.img_cate.setImageResource(cate.getRsID());
         holder.txt_cate.setText(cate.getTitle());
+        holder.layoutCate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((HomeActivity)mContext).moveToRestaurant();
+            }
+        });
 
     }
 
@@ -62,13 +70,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         private ImageView img_cate;
         private TextView txt_cate;
+        private LinearLayout layoutCate;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
             img_cate = itemView.findViewById(R.id.img_category);
             txt_cate = itemView.findViewById(R.id.cate_title);
-
+            layoutCate = itemView.findViewById(R.id.layoutCategory);
 
         }
     }

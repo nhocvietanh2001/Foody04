@@ -16,7 +16,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
-
+    ViewPagerAdapter viewPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,6 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         viewPager = findViewById(R.id.viewPager);
-
 
         setUpViewPager();
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -48,10 +47,8 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void setUpViewPager() {
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdapter);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -83,5 +80,10 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void moveToRestaurant() {
+        ViewPager viewPager = this.findViewById(R.id.viewPager);
+        viewPager.setCurrentItem(1);
     }
 }

@@ -114,13 +114,14 @@ public class MainActivity extends AppCompatActivity {
     }
     //Database
     private void initializeDatabase() {
-        DB.exec("drop Table if exists vouchers");
+        DBfoody.createDatabase();
+        /*DB.exec("drop Table if exists vouchers");
         DBfoody.exec("drop Table if exists vouchers");
         DBfoody.exec("create Table vouchers(vid INTEGER primary key, vname TEXT, vtype TEXT, vamount INTEGER)");
         DBfoody.insertVoucher(1, new Voucher("50% OFF", "percent", 50));
         DBfoody.insertVoucher(2, new Voucher("25% OFF", "percent", 25));
         DBfoody.insertVoucher(3, new Voucher("10.000 VND", "VND", 10000));
-        DBfoody.insertVoucher(4, new Voucher("20.000 VND", "VND", 20000));
+        DBfoody.insertVoucher(4, new Voucher("20.000 VND", "VND", 20000));*/
         //DB.updateVoucher(3, new Voucher("10.000 VND", "VND", 10000));
 
 

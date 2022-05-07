@@ -1,5 +1,6 @@
 package hcmute.spkt.phamvietanh19110151.foodyui.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -29,8 +30,7 @@ import hcmute.spkt.phamvietanh19110151.foodyui.Model.UserLocalStore;
 import me.relex.circleindicator.CircleIndicator;
 
 public class HomeFragment extends Fragment {
-
-    private ViewPager viewPager, viewPagerSlider;
+    private ViewPager viewPagerSlider;
     private CircleIndicator circleIndicator;
     private PhotoSliderAdapter photoSliderAdapter;
     private RecyclerView rcvCate;
@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment {
     private TextView tvCustomerName;
     private List<PhotoSlider> mListPhotoSld;
     private Timer mTimer;
+    Context context;
 
     UserLocalStore localStore;
     User user;
@@ -60,10 +61,11 @@ public class HomeFragment extends Fragment {
         viewPagerSlider.setAdapter(photoSliderAdapter);
         circleIndicator.setViewPager(viewPagerSlider);
         photoSliderAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
+        context = this.getActivity().getApplication();
 
         rcvCate = view.findViewById(R.id.rcvCate);
 
-        mCategoryAdapter = new CategoryAdapter();
+        mCategoryAdapter = new CategoryAdapter(getActivity());
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),4);
         rcvCate.setLayoutManager(gridLayoutManager);

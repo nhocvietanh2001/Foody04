@@ -4,40 +4,40 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.CategoryAdapter;
 import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.FoodAdapter;
-import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.PhotoSliderAdapter;
 import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.RestaurantAdapter;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
-import hcmute.spkt.phamvietanh19110151.foodyui.Model.PhotoSlider;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Restaurant;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
-import me.relex.circleindicator.CircleIndicator;
 
-public class RestaurantFragment extends Fragment {
+public class RestaurantFragment extends Fragment{
 
     private RecyclerView rcvRestaurant, rcvDishes;
     private RestaurantAdapter restaurantAdapter;
     private FoodAdapter foodAdapter;
+    private Button btnShowAllDishes;
+    Context context;
+    SharedPreferences sharedPreferences;
     DBFoody MyDB;
     List<Restaurant> restaurants;
     List<Food> foods;
@@ -49,11 +49,13 @@ public class RestaurantFragment extends Fragment {
 
         rcvRestaurant = view.findViewById(R.id.rcvRestaurant);
         rcvDishes = view.findViewById(R.id.rcvDishes);
+        btnShowAllDishes = view.findViewById(R.id.btnShowAllDishes);
 
         MyDB = new DBFoody(getActivity());
         Cursor resCursor = MyDB.getRestaurants();
         restaurants = new ArrayList<>();
         foods = new ArrayList<>();
+        context = this.getActivity().getApplication();
 
         while (resCursor.moveToNext()) {
             int id = resCursor.getInt(0);
@@ -84,20 +86,35 @@ public class RestaurantFragment extends Fragment {
                     byte[] image = foodCursor.getBlob(5);
                     foods.add(new Food(fname, fcategory, fprice, image));
                 }
-                LinearLayoutManager linearLayout2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                rcvDishes.setLayoutManager(linearLayout2);
-
-                //foodAdapter.setFoods(foods);
-                //rcvDishes.setAdapter(foodAdapter);
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
                 rcvDishes.setLayoutManager(gridLayoutManager);
                 foodAdapter.setFoods(foods);
+                foods = new ArrayList<>();
                 rcvDishes.setAdapter(foodAdapter);
-
 
             }
         }, new IntentFilter("restaurant"));
+
+        btnShowAllDishes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Cursor foodCursor = MyDB.getFoods();
+                while(foodCursor.moveToNext()) {
+                    String fname = foodCursor.getString(1);
+                    String fcategory = foodCursor.getString(2);
+                    int fprice = foodCursor.getInt(3);
+                    byte[] image = foodCursor.getBlob(5);
+                    foods.add(new Food(fname, fcategory, fprice, image));
+                }
+                GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(),2);
+                rcvDishes.setLayoutManager(gridLayoutManager2);
+
+                foodAdapter.setFoods(foods);
+                foods = new ArrayList<>();
+                rcvDishes.setAdapter(foodAdapter);
+            }
+        });
 
         return view;
     }

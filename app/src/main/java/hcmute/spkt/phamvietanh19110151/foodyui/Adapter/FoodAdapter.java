@@ -43,7 +43,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             return;
         }
         holder.tvFood.setText(food.getName());
-        holder.tvPrice.setText(Integer.toString(food.getPrice()));
+        holder.tvPrice.setText(Integer.toString(food.getPrice())+" vnd");
         holder.imgFood.setImageBitmap(food.getImageBitmap());
     }
 

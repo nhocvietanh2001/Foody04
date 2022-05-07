@@ -12,8 +12,11 @@ import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.RestaurantFragment;
 import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.SettingFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+
+    FragmentManager fm;
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
+        this.fm = fm;
     }
 
     @NonNull
@@ -35,6 +38,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             default:
                 return new HomeFragment();
         }
+    }
+
+    public String getFragmentTag(int viewId, int position) {
+        return "android:switcher:" + viewId + ":" + position;
+    }
+
+    public Fragment getFragmentByTag(int containerId, int position) {
+        return fm.findFragmentByTag(getFragmentTag(containerId, position));
     }
 
     @Override
