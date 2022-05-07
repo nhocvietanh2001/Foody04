@@ -37,7 +37,6 @@ public class RestaurantFragment extends Fragment{
     private FoodAdapter foodAdapter;
     private Button btnShowAllDishes;
     Context context;
-    SharedPreferences sharedPreferences;
     DBFoody MyDB;
     List<Restaurant> restaurants;
     List<Food> foods;
