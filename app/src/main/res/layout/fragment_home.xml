@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#EBF6EB"
     tools:context=".Fragment.HomeFragment"
     android:orientation="vertical">
@@ -79,9 +80,9 @@
         android:id="@+id/circle_indicator_slider"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
+        app:ci_drawable="@drawable/circleindicator_round"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:background="#DEFDBB"
       />
     <ImageView
         android:layout_marginTop="5dp"
