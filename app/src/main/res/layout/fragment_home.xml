@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#EBF6EB"
     tools:context=".Fragment.HomeFragment"
@@ -61,7 +62,7 @@
       <ImageView
           android:layout_width="match_parent"
           android:background="@color/very_dark_green"
-          android:layout_height="5dp"/>
+          android:layout_height="3dp"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
@@ -92,7 +93,7 @@
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:background="@color/very_dark_green"
-        android:layout_height="5dp"/>
+        android:layout_height="3dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,12 +107,19 @@
         />
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
-
+       android:layout_marginLeft="30dp"
        android:padding="2dp"
        android:id="@+id/rcvCate"
        android:layout_marginTop="10dp"
        android:layout_marginBottom="10dp"
        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:background="@color/very_dark_green"
+        android:layout_height="3dp"/>
+
+
 
     <TextView
         android:layout_width="wrap_content"

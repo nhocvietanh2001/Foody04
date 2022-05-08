@@ -51,15 +51,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.tvFood.setText(food.getName());
         holder.tvPrice.setText(Integer.toString(food.getPrice())+" vnd");
         holder.imgFood.setImageBitmap(food.getImageBitmap());
-        holder.layoutFoodView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //
-                //
-                //
-                //
-            }
-        });
 
 
     }
@@ -83,7 +74,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             imgFood = itemView.findViewById(R.id.imgFood);
             tvFood = itemView.findViewById(R.id.tvFoodName);
             tvPrice = itemView.findViewById(R.id.tvFoodPrice);
-            layoutFoodView = itemView.findViewById(R.id.layoutFood_ls);
+
         }
     }
 }
