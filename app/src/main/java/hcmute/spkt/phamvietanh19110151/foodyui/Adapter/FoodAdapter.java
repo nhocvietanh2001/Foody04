@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 import java.util.List;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.RestaurantFragment;
@@ -51,7 +53,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.tvFood.setText(food.getName());
         holder.tvPrice.setText(Integer.toString(food.getPrice())+" vnd");
         holder.imgFood.setImageBitmap(food.getImageBitmap());
+        holder.layoutFoodView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View viewDialog = layoutInflater.inflate(R.layout.food_view, null);
 
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+                bottomSheetDialog.setContentView(viewDialog);
+                bottomSheetDialog.show();
+            }
+        });
 
     }
 
@@ -74,7 +86,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             imgFood = itemView.findViewById(R.id.imgFood);
             tvFood = itemView.findViewById(R.id.tvFoodName);
             tvPrice = itemView.findViewById(R.id.tvFoodPrice);
-
+            layoutFoodView = itemView.findViewById(R.id.listFood);
         }
     }
 }

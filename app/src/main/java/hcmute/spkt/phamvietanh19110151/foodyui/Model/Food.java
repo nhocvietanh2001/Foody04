@@ -9,12 +9,16 @@ public class Food {
     private String category;
     private byte[] image;
     private int price;
+    private int rid;
+    private int fid;
 
-    public Food(String name, String category, int price, byte[] image) {
+    public Food(int fid, String name, String category, int price,int rid, byte[] image) {
+        this.fid = fid;
         this.name = name;
         this.category = category;
         this.price = price;
         this.image = image;
+        this.rid = rid;
     }
 
     public int getPrice() {
@@ -52,5 +56,21 @@ public class Food {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public int getRid() {
+        return rid;
+    }
+
+    public void setRid(int rid) {
+        this.rid = rid;
+    }
+
+    public int getFid() {
+        return fid;
+    }
+
+    public void setFid(int fid) {
+        this.fid = fid;
     }
 }

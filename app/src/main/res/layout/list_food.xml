@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/very_dark_green"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/listFood">
 
         <ImageView
             android:src="@drawable/drink"

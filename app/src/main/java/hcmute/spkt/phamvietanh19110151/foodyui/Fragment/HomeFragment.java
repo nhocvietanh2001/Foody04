@@ -100,11 +100,13 @@ public class HomeFragment extends Fragment {
                 String category = intent.getStringExtra("category");
                 Cursor foodCursor = MyDB.getFoodsWithCategory(category);
                 while(foodCursor.moveToNext()) {
+                    int fid = foodCursor.getInt(0);
                     String fname = foodCursor.getString(1);
                     String fcategory = foodCursor.getString(2);
                     int fprice = foodCursor.getInt(3);
+                    int rid = foodCursor.getInt(4);
                     byte[] image = foodCursor.getBlob(5);
-                    foods.add(new Food(fname, fcategory, fprice, image));
+                    foods.add(new Food(fid, fname, fcategory, fprice, rid, image));
                 }
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);

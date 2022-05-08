@@ -79,11 +79,13 @@ public class RestaurantFragment extends Fragment{
                 int rid = intent.getIntExtra("rid", 0);
                 Cursor foodCursor = MyDB.getFoodsAtRestaurant(rid);
                 while(foodCursor.moveToNext()) {
+                    int fid = foodCursor.getInt(0);
                     String fname = foodCursor.getString(1);
                     String fcategory = foodCursor.getString(2);
                     int fprice = foodCursor.getInt(3);
+                    int rid1 = foodCursor.getInt(4);
                     byte[] image = foodCursor.getBlob(5);
-                    foods.add(new Food(fname, fcategory, fprice, image));
+                    foods.add(new Food(fid, fname, fcategory, fprice, rid1, image));
                 }
 
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
@@ -100,11 +102,13 @@ public class RestaurantFragment extends Fragment{
             public void onClick(View view) {
                 Cursor foodCursor = MyDB.getFoods();
                 while(foodCursor.moveToNext()) {
+                    int fid = foodCursor.getInt(0);
                     String fname = foodCursor.getString(1);
                     String fcategory = foodCursor.getString(2);
                     int fprice = foodCursor.getInt(3);
+                    int rid = foodCursor.getInt(4);
                     byte[] image = foodCursor.getBlob(5);
-                    foods.add(new Food(fname, fcategory, fprice, image));
+                    foods.add(new Food(fid, fname, fcategory, fprice, rid, image));
                 }
                 GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(),2);
                 rcvDishes.setLayoutManager(gridLayoutManager2);

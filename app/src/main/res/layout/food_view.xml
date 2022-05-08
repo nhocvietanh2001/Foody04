@@ -109,7 +109,7 @@
             android:text="Add to cart"
             android:textStyle="bold"
             android:textColor="@color/very_dark_green"
-            android:textSize="20dp"
+            android:textSize="15dp"
             tools:ignore="Suspicious0dp" />
 
         <Button
@@ -124,7 +124,7 @@
             android:text="Cancel"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
     </LinearLayout>
 
 </LinearLayout>
