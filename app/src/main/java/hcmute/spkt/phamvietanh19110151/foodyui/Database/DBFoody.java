@@ -165,6 +165,11 @@ public class DBFoody extends SQLiteOpenHelper {
         return MyDB.rawQuery("SELECT * FROM foods", null);
     }
 
+    public Cursor getRestaurantByID(int id){
+        SQLiteDatabase MyDB = this.getReadableDatabase();
+        return MyDB.rawQuery("SELECT rname FROM restaurants WHERE rid = ?", new String[]{Integer.toString(id)});
+    }
+
     public void exec(String sql) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         MyDB.execSQL(sql);

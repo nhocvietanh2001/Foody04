@@ -53,7 +53,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             public void onClick(View view) {
                 Intent intent = new Intent("restaurant");
                 intent.putExtra("rid", res.getId());
+
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+               // holder.layoutRestaurant.setBackgroundColor(context.getResources().getColor(R.color.green));
             }
         });
     }

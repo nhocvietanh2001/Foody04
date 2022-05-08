@@ -70,7 +70,6 @@ public class RestaurantFragment extends Fragment{
         restaurantAdapter = new RestaurantAdapter(getActivity());
         restaurantAdapter.setRestaurantList(restaurants);
         rcvRestaurant.setAdapter(restaurantAdapter);
-
         foodAdapter = new FoodAdapter(getActivity());
 
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {

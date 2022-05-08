@@ -29,7 +29,7 @@ public class SettingFragment extends Fragment {
         tvCustomerName = view.findViewById(R.id.tvSettingCustomerName);
         tvEditProfile = view.findViewById(R.id.tvCustomerEditProfile);
         tvViewVoucher = view.findViewById(R.id.tvCustomerViewVoucher);
-        tvOrderStatus = view.findViewById(R.id.tvCustomerOrderStatus);
+        tvOrderStatus = view.findViewById(R.id.tvCustomerInvoice);
         tvLogOut = view.findViewById(R.id.tvCustomerLogout);
 
         localStore = new UserLocalStore(getActivity());

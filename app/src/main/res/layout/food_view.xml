@@ -11,7 +11,7 @@
     <ImageView
         android:src="@drawable/f21"
         android:scaleType="centerCrop"
-        android:id="@+id/imgFood"
+        android:id="@+id/imgFood_bs"
         android:layout_width="match_parent"
         android:layout_height="120dp"/>
     <ImageView
@@ -26,11 +26,22 @@
         android:background="@color/white"
         android:padding="10dp"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvFoodPrice_bs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="20000 vnd"
+            android:textColor="@color/black"
+            android:textSize="28sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:textStyle="bold"
             android:text="Name:"
             android:textColor="@color/black"
@@ -65,26 +76,6 @@
             android:text="Nhà hàng chay"
             android:textColor="@color/black"
             android:textSize="17sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="15dp"
-            android:textStyle="bold"
-            android:text="Price:"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tvFoodPrice_bs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:text="20000 vnd"
-            android:textColor="@color/black"
-            android:textSize="25sp" />
 
     </LinearLayout>
 

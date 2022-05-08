@@ -2,9 +2,11 @@ package hcmute.spkt.phamvietanh19110151.foodyui.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,9 +20,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
 
+import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
 import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.RestaurantFragment;
 import hcmute.spkt.phamvietanh19110151.foodyui.MainActivity;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Restaurant;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder>{
@@ -46,6 +50,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FoodAdapter.FoodViewHolder holder, int position) {
+
         Food food = Foods.get(position);
         if(food == null){
             return;
@@ -62,6 +67,44 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
                 bottomSheetDialog.setContentView(viewDialog);
                 bottomSheetDialog.show();
+                bottomSheetDialog.setCancelable(false);
+
+                //set data
+                TextView bsFname, bsFprice, bsFrestaurant;
+                ImageView bsImg;
+                bsFname = viewDialog.findViewById(R.id.tvFoodName_bs);
+                bsFprice = viewDialog.findViewById(R.id.tvFoodPrice_bs);
+                bsFrestaurant = viewDialog.findViewById(R.id.tvFoodRestaurant_bs);
+                bsImg = viewDialog.findViewById(R.id.imgFood_bs);
+
+                bsFname.setText(food.getName());
+                bsFprice.setText(Integer.toString(food.getPrice())+" vnd");
+                bsImg.setImageBitmap(food.getImageBitmap());
+
+                DBFoody MyDB = new DBFoody(context);
+
+                Cursor res = MyDB.getRestaurantByID(food.getRid());
+                while (res.moveToNext()){
+                    String name = res.getString(0);
+                    bsFrestaurant.setText(name);
+                }
+                //
+
+                Button btnCancel = viewDialog.findViewById(R.id.btnCancel_bs);
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+
+                Button btnAddToCart = viewDialog.findViewById(R.id.btnAddToCart_bs);
+                btnAddToCart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context,Integer.toString(food.getFid()),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

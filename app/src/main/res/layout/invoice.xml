@@ -30,21 +30,11 @@
             android:textSize="33dp" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ID: 190129"
-        android:textSize="30dp"
-        android:textColor="@color/green"
-        android:id="@+id/tvInvoiceID"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="15dp"
-        />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/line"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="30dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
