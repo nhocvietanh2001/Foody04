@@ -67,7 +67,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
                 bottomSheetDialog.setContentView(viewDialog);
                 bottomSheetDialog.show();
-                bottomSheetDialog.setCancelable(false);
 
                 //set data
                 TextView bsFname, bsFprice, bsFrestaurant;
