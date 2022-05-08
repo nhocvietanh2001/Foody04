@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 String phone = uPhone.getText().toString();
                 String pass = uPass.getText().toString();
 
-
                 if(phone.equals("")||pass.equals("")){
                     Toast.makeText(MainActivity.this,"Please enter all fields",Toast.LENGTH_SHORT).show();
                 }else{
@@ -115,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     //Database
     private void initializeDatabase() {
         DBfoody.createDatabase();
+        DB.exec("CREATE TABLE IF NOT EXISTS cart(cid INTEGER primary key, uname TEXT, fid TEXT, amount TEXT)");
         /*DB.exec("drop Table if exists vouchers");
         DBfoody.exec("drop Table if exists vouchers");
         DBfoody.exec("create Table vouchers(vid INTEGER primary key, vname TEXT, vtype TEXT, vamount INTEGER)");

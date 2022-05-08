@@ -21,10 +21,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import java.util.List;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
+import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
 import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.RestaurantFragment;
 import hcmute.spkt.phamvietanh19110151.foodyui.MainActivity;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Restaurant;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.UserLocalStore;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder>{
@@ -81,6 +84,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 bsImg.setImageBitmap(food.getImageBitmap());
 
                 DBFoody MyDB = new DBFoody(context);
+                DBHelper DB = new DBHelper(context);
 
                 Cursor res = MyDB.getRestaurantByID(food.getRid());
                 while (res.moveToNext()){
@@ -101,7 +105,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 btnAddToCart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context,Integer.toString(food.getFid()),Toast.LENGTH_SHORT).show();
+                        UserLocalStore localStore = new UserLocalStore(context);
+                        User user = localStore.getUser();
+                        DB.insertCart(user.getPhone(), food.getFid());
+                        Toast.makeText(context,"Added",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
