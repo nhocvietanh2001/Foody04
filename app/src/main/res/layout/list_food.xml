@@ -28,8 +28,8 @@
             android:id="@+id/tvFoodName"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:padding="6dp"
-            android:textSize="14sp"
+            android:padding="4dp"
+            android:textSize="13sp"
             android:textColor="@color/white"
             android:text="Dry food"
             android:layout_height="wrap_content"/>

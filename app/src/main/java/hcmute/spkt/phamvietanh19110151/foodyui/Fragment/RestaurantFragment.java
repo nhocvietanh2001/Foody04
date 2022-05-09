@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -36,6 +37,7 @@ public class RestaurantFragment extends Fragment{
     private RestaurantAdapter restaurantAdapter;
     private FoodAdapter foodAdapter;
     private Button btnShowAllDishes;
+    private SearchView searchView;
     Context context;
     DBFoody MyDB;
     List<Restaurant> restaurants;
@@ -49,6 +51,7 @@ public class RestaurantFragment extends Fragment{
         rcvRestaurant = view.findViewById(R.id.rcvRestaurant);
         rcvDishes = view.findViewById(R.id.rcvDishes);
         btnShowAllDishes = view.findViewById(R.id.btnShowAllDishes);
+        searchView = view.findViewById(R.id.searchfood);
 
         MyDB = new DBFoody(getActivity());
         Cursor resCursor = MyDB.getRestaurants();
@@ -99,6 +102,7 @@ public class RestaurantFragment extends Fragment{
         btnShowAllDishes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                searchView.setVisibility(view.VISIBLE);
                 Cursor foodCursor = MyDB.getFoods();
                 while(foodCursor.moveToNext()) {
                     int fid = foodCursor.getInt(0);

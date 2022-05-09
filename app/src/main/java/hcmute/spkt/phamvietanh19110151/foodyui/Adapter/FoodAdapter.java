@@ -109,8 +109,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     }
 
-
-
     @Override
     public int getItemCount() {
         return Foods.size();
