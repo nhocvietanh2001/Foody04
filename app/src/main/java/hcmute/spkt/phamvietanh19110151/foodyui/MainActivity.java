@@ -212,4 +212,5 @@ public class MainActivity extends AppCompatActivity {
         byte[] img = byteArray.toByteArray();
         return img;
     }
+
 }

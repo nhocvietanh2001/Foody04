@@ -1,6 +1,7 @@
 package hcmute.spkt.phamvietanh19110151.foodyui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -16,6 +17,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
+    private SearchView searchView;
     ViewPagerAdapter viewPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         viewPager = findViewById(R.id.viewPager);
+        searchView = findViewById(R.id.searchfood);
 
         setUpViewPager();
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -86,4 +89,5 @@ public class HomeActivity extends AppCompatActivity {
         ViewPager viewPager = this.findViewById(R.id.viewPager);
         viewPager.setCurrentItem(1);
     }
+
 }

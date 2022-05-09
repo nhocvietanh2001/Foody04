@@ -7,18 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
@@ -30,9 +35,10 @@ import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.UserLocalStore;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder>{
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> implements Filterable {
     private Context context;
     List<Food> Foods;
+    List<Food> FoodsOld;
 
     public FoodAdapter(Context context) {
         this.context = context;
@@ -40,6 +46,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     public void setFoods(List<Food> foods) {
         this.Foods = foods;
+        this.FoodsOld = foods;
         notifyDataSetChanged();
     }
 
@@ -134,5 +141,39 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             tvPrice = itemView.findViewById(R.id.tvFoodPrice);
             layoutFoodView = itemView.findViewById(R.id.listFood);
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constrant) {
+                String strSearch = constrant.toString();
+
+                if(strSearch.isEmpty()){
+                   Foods = FoodsOld;
+                }else {
+                    List<Food> list = new ArrayList<>();
+                    for(Food food: FoodsOld){
+                        if(food.getName().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(food);
+                        }
+                    }
+
+                    Foods =list;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = Foods;
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                Foods = (List<Food>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }

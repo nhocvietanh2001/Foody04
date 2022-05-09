@@ -73,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/search_view_bg"
+            android:queryHint="Search food..."
             android:searchIcon="@drawable/ic_baseline_search_24" />
 
     <androidx.recyclerview.widget.RecyclerView
