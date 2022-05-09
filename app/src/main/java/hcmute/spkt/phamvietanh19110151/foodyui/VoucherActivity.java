@@ -44,7 +44,7 @@ public class VoucherActivity extends AppCompatActivity {
         });
         lvVoucher = findViewById(R.id.lvCustomerVouchers);
         arrayVoucher = new ArrayList<>();
-        adapter = new VoucherAdapter(getApplication());
+        adapter = new VoucherAdapter(getApplication(), false);
         lvVoucher.setAdapter(adapter);
         DB = new DBFoody(this);
 

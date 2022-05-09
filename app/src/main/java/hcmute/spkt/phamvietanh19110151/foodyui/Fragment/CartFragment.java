@@ -94,7 +94,7 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
 
                 RecyclerView rcvVoucher = dialog.findViewById(R.id.rcvVoucherDialog);
                 Button btnCancel = dialog.findViewById(R.id.btnCancelVoucher);
-                VoucherAdapter adapter = new VoucherAdapter(getActivity());
+                VoucherAdapter adapter = new VoucherAdapter(getActivity(), true);
                 adapter.setVoucherOnClick(CartFragment.this::onVoucherClick);
                 List<Voucher> vouchers = new ArrayList<>();
 
@@ -146,7 +146,7 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
         if (type.equals("percent")) {
             tvVoucher.setVisibility(View.VISIBLE);
             voucherAmount = itemTotal / 100 * value;
-            tvVoucher.setText("Voucher Amount: -" + Integer.toString(itemTotal - voucherAmount));
+            tvVoucher.setText("Voucher Amount: -" + Integer.toString(itemTotal - (itemTotal - voucherAmount)));
             return;
         }
         if (type.equals("VND")) {

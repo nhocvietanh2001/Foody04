@@ -30,9 +30,11 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
     Context context;
     List<Voucher> vouchers;
     voucherOnClick onClick;
+    Boolean isClickable;
 
-    public VoucherAdapter(Context context) {
+    public VoucherAdapter(Context context, Boolean isClickable) {
         this.context = context;
+        this.isClickable = isClickable;
     }
 
     public void setVouchers(List<Voucher> vouchers) {
@@ -63,13 +65,14 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
         else {
             holder.imgVoucher.setImageResource(R.drawable.higreen2);
         }
-        holder.layoutVoucher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "hell0", Toast.LENGTH_SHORT).show();
-                onClick.onVoucherClick(voucher.getType(), voucher.getAmount());
-            }
-        });
+        if (isClickable) {
+            holder.layoutVoucher.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClick.onVoucherClick(voucher.getType(), voucher.getAmount());
+                }
+            });
+        }
     }
 
     @Override
