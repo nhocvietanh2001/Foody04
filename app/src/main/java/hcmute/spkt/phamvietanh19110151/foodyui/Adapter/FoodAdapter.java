@@ -109,6 +109,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                         User user = localStore.getUser();
                         DB.insertCart(user.getPhone(), food.getFid());
                         Toast.makeText(context,"Added",Toast.LENGTH_SHORT).show();
+
                     }
                 });
             }

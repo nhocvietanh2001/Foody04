@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.ViewPagerAdapter;
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.IFragChange;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -28,6 +29,28 @@ public class HomeActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
 
         setUpViewPager();
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 2) {
+                    IFragChange frag = (IFragChange) viewPagerAdapter.instantiateItem(viewPager,2);
+                    if (frag != null) {
+                        frag.fragmentBecameVisible();
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_home:

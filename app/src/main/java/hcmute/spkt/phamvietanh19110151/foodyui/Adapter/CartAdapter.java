@@ -3,6 +3,7 @@ package hcmute.spkt.phamvietanh19110151.foodyui.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.CartFragment;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.CartItem;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
@@ -35,7 +38,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
     @NonNull
     @Override
     public CartAdapter.CartItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_food,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_cart_item,parent,false);
 
         return new CartAdapter.CartItemViewHolder(view);
     }
@@ -46,10 +49,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
         if(cartItem == null)
             return;
         holder.tvFoodName.setText(cartItem.getFoodName());
-        holder.tvPrice.setText(cartItem.getPrice());
-        holder.tvAmount.setText(cartItem.getAmount());
+        holder.tvPrice.setText(Integer.toString(cartItem.getPrice()));
+        holder.tvAmount.setText(Integer.toString(cartItem.getAmount()));
         holder.imgFood.setImageBitmap(cartItem.getImageBitmap());
-        holder.tvTotal.setText(cartItem.getTotal());
+        holder.tvTotal.setText(Integer.toString(cartItem.getTotal()));
         holder.btnGiam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,18 +69,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
                         public void onClick(DialogInterface dialogInterface, int i) {
                             DBHelper MyDB = new DBHelper(context);
                             MyDB.updateAmount(cartItem.getCid(), 0);
-
+                            CartItems.remove(cartItem);
+                            intent(calTotal(CartItems));
+                            CartAdapter foodAdapter = CartFragment.cartAdapter;
+                            RecyclerView rcv = CartFragment.rcvOrdered;
+                            foodAdapter.setItems(CartItems);
+                            rcv.setAdapter(foodAdapter);
+                            return;
                         }
                     });
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
                 }
+
+                amount = amount - 1;
+                holder.tvAmount.setText(Integer.toString(amount));
+                CartItems.get(position).setAmount(amount);
+                intent(calTotal(CartItems));
             }
         });
         holder.btnTang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int amount = Integer.parseInt(holder.tvAmount.getText().toString());
+                amount = amount + 1;
+                DBHelper MyDB = new DBHelper(context);
+                MyDB.updateAmount(cartItem.getCid(), amount);
+                holder.tvAmount.setText(Integer.toString(amount));
             }
         });
     }
@@ -87,6 +105,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
         return CartItems.size();
     }
 
+    public int calTotal(List<CartItem> cartItems) {
+        int total = 0;
+        for (CartItem item : cartItems)
+            total += item.getTotal();
+        return total;
+    }
+
+    public void intent(int total) {
+        Intent intent = new Intent("cartTotalChange");
+        intent.putExtra("Total", total);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+    }
 
     public class CartItemViewHolder extends RecyclerView.ViewHolder{
 
