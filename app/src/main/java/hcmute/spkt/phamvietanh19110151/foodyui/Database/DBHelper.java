@@ -10,7 +10,7 @@ import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DBNAME = "Login.db";
+    public static final String DBNAME = "User.db";
 
     public DBHelper(Context context) {
         super(context, DBNAME, null, 1);
@@ -50,6 +50,28 @@ public class DBHelper extends SQLiteOpenHelper {
         if (result > 0)
             return true;
         return false;
+    }
+
+    public void insertCart(String name, int fid) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor items = MyDB.rawQuery("SELECT * FROM cart WHERE uname = ? and fid = ?", new String[] {name, Integer.toString(fid)});
+        while (items.moveToNext()) {
+            int item = items.getInt(3);
+            if (item >= 1) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("uname", name);
+                contentValues.put("fid", fid);
+                item = item + 1;
+                contentValues.put("amount", item);
+                MyDB.update("cart", contentValues,"uname = ? and fid = ?", new String[] {name, Integer.toString(fid)});
+                return;
+            }
+        }
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("uname", name);
+        contentValues.put("fid", fid);
+        contentValues.put("amount", 1);
+        MyDB.insert("cart", null, contentValues);
     }
 
     public void exec(String sql) {
