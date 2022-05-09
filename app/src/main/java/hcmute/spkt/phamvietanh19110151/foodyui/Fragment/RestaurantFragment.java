@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -40,6 +41,7 @@ public class RestaurantFragment extends Fragment{
     DBFoody MyDB;
     List<Restaurant> restaurants;
     List<Food> foods;
+    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +51,7 @@ public class RestaurantFragment extends Fragment{
         rcvRestaurant = view.findViewById(R.id.rcvRestaurant);
         rcvDishes = view.findViewById(R.id.rcvDishes);
         btnShowAllDishes = view.findViewById(R.id.btnShowAllDishes);
+        searchView = view.findViewById(R.id.searchfood);
 
         MyDB = new DBFoody(getActivity());
         Cursor resCursor = MyDB.getRestaurants();
@@ -75,6 +78,7 @@ public class RestaurantFragment extends Fragment{
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+                searchView.setVisibility(view.GONE);
                 int rid = intent.getIntExtra("rid", 0);
                 Cursor foodCursor = MyDB.getFoodsAtRestaurant(rid);
                 while(foodCursor.moveToNext()) {
@@ -99,6 +103,7 @@ public class RestaurantFragment extends Fragment{
         btnShowAllDishes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                searchView.setVisibility(view.VISIBLE);
                 Cursor foodCursor = MyDB.getFoods();
                 while(foodCursor.moveToNext()) {
                     int fid = foodCursor.getInt(0);
@@ -117,6 +122,22 @@ public class RestaurantFragment extends Fragment{
                 rcvDishes.setAdapter(foodAdapter);
             }
         });
+
+        //search
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                foodAdapter.getFilter().filter(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                foodAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
+
 
         return view;
     }

@@ -11,6 +11,7 @@ import java.util.List;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.CartItem;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Invoice;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -55,6 +56,18 @@ public class DBHelper extends SQLiteOpenHelper {
         if (result > 0)
             return true;
         return false;
+    }
+
+    public void insertInvoice(Invoice invoice){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("iID", invoice.getiID());
+        contentValues.put("uID", invoice.getuID());
+        contentValues.put("iTotalMoney", invoice.getiTotalMoney());
+        contentValues.put("listOrdered", invoice.getListOrdered());
+        contentValues.put("iTime", invoice.getiTime());
+        MyDB.insert("foods", null, contentValues);
     }
 
     public void insertCart(String name, int fid) {

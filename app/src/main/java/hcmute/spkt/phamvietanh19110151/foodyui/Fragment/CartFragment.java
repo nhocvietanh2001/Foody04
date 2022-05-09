@@ -34,6 +34,7 @@ import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.CartAdapter;
 import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.VoucherAdapter;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
+import hcmute.spkt.phamvietanh19110151.foodyui.InvoiceActivity;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.CartItem;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Voucher;
@@ -117,6 +118,15 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
                 });
 
                 dialog.show();
+            }
+        });
+
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), InvoiceActivity.class);
+                startActivity(intent);
+
             }
         });
 
