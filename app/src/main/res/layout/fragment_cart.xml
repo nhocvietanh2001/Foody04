@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F7FFEE"
@@ -38,7 +38,7 @@
 
             <TextView
                 android:id="@+id/txtViewTotal"
-                android:layout_width="205dp"
+                android:layout_width="wrap_content"
                 android:layout_height="59dp"
                 android:fontFamily="@font/alatsi"
                 android:text="TOTAL:"
@@ -53,7 +53,7 @@
 
             <TextView
                 android:id="@+id/txtViewShipCost"
-                android:layout_width="178dp"
+                android:layout_width="wrap_content"
                 android:layout_height="34dp"
 
                 android:layout_marginBottom="29dp"
@@ -64,13 +64,30 @@
 
                 app:layout_constraintBottom_toTopOf="@+id/imgVoucher"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.114"
+                app:layout_constraintHorizontal_bias="0.09"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtViewItemTotal" />
 
             <TextView
+                android:id="@+id/tvVoucherCart"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+
+                android:fontFamily="@font/alatsi"
+                android:text="Voucher:"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:visibility="gone"
+
+                app:layout_constraintBottom_toTopOf="@+id/txtViewTotal"
+                app:layout_constraintEnd_toStartOf="@+id/imgVoucher"
+                app:layout_constraintHorizontal_bias="0.109"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtViewShipCost"/>
+
+            <TextView
                 android:id="@+id/txtViewItemTotal"
-                android:layout_width="117dp"
+                android:layout_width="wrap_content"
                 android:layout_height="34dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/alatsi"
@@ -91,7 +108,7 @@
                 android:layout_marginTop="-50dp"
                 app:layout_constraintBottom_toTopOf="@id/txtViewTotal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.012"
+                app:layout_constraintHorizontal_bias="0.907"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtViewShipCost"
                 app:layout_constraintVertical_bias="0.502"

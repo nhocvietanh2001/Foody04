@@ -27,8 +27,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
 
     private Context context;
     List<CartItem> CartItems;
+    ButtonListener buttonListener;
 
     public CartAdapter(Context context) {this.context = context;}
+
+    public void setButtonListener(ButtonListener listener) {this.buttonListener = listener;}
 
     public void setItems(List<CartItem> cartItems) {
         this.CartItems = cartItems;
@@ -39,7 +42,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
     @Override
     public CartAdapter.CartItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_cart_item,parent,false);
-
         return new CartAdapter.CartItemViewHolder(view);
     }
 
@@ -70,22 +72,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
                             DBHelper MyDB = new DBHelper(context);
                             MyDB.updateAmount(cartItem.getCid(), 0);
                             CartItems.remove(cartItem);
-                            intent(calTotal(CartItems));
-                            CartAdapter foodAdapter = CartFragment.cartAdapter;
-                            RecyclerView rcv = CartFragment.rcvOrdered;
-                            foodAdapter.setItems(CartItems);
-                            rcv.setAdapter(foodAdapter);
+
+                            buttonListener.onButtonClick(calTotal(CartItems));
                             return;
                         }
                     });
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
                 }
-
+                DBHelper MyDB = new DBHelper(context);
                 amount = amount - 1;
+                MyDB.updateAmount(cartItem.getCid(), amount);
                 holder.tvAmount.setText(Integer.toString(amount));
                 CartItems.get(position).setAmount(amount);
-                intent(calTotal(CartItems));
+                buttonListener.onButtonClick(calTotal(CartItems));
             }
         });
         holder.btnTang.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +96,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
                 DBHelper MyDB = new DBHelper(context);
                 MyDB.updateAmount(cartItem.getCid(), amount);
                 holder.tvAmount.setText(Integer.toString(amount));
+                CartItems.get(position).setAmount(amount);
+                buttonListener.onButtonClick(calTotal(CartItems));
             }
         });
     }
@@ -110,12 +112,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
         for (CartItem item : cartItems)
             total += item.getTotal();
         return total;
-    }
-
-    public void intent(int total) {
-        Intent intent = new Intent("cartTotalChange");
-        intent.putExtra("Total", total);
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
     public class CartItemViewHolder extends RecyclerView.ViewHolder{
@@ -138,5 +134,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
             layoutFoodCart = itemView.findViewById(R.id.layoutFoodCart);
 
         }
+    }
+
+    public List<CartItem> getCartItems() {
+        return CartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        CartItems = cartItems;
+    }
+
+    public interface ButtonListener{
+        void onButtonClick(int total);
     }
 }

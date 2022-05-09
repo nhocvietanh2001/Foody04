@@ -1,9 +1,14 @@
 package hcmute.spkt.phamvietanh19110151.foodyui.Fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,15 +28,16 @@ import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.CartAdapter;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.CartItem;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
-public class CartFragment extends Fragment implements IFragChange{
+public class CartFragment extends Fragment implements IFragChange, CartAdapter.ButtonListener{
 
     public static RecyclerView rcvOrdered;
     public static CartAdapter cartAdapter;
     DBFoody MyDB;
     DBHelper DB;
-    TextView tvItemTotal, tvDeliveryServices, tvTotal;
+    TextView tvItemTotal, tvDeliveryServices, tvTotal, tvVoucher;
     ImageView imgVoucher;
     Button btnCheckout;
     List<CartItem> cartItems;
@@ -47,15 +53,28 @@ public class CartFragment extends Fragment implements IFragChange{
         tvTotal = view.findViewById(R.id.txtViewTotal);
         imgVoucher = view.findViewById(R.id.imgFood);
         btnCheckout = view.findViewById(R.id.btnCheckOut);
+        tvVoucher = view.findViewById(R.id.tvVoucherCart);
 
         mapping();
 
+        int shipCost = 2000;
+        int itemTotal = cartAdapter.calTotal(cartAdapter.getCartItems());
+
+        bind(shipCost, itemTotal);
+
         return view;
+    }
+
+    public void bind(int shipCost, int itemTotal) {
+        tvItemTotal.setText("Item Total: " + Integer.toString(itemTotal));
+        tvDeliveryServices.setText("Ship cost: " + Integer.toString(shipCost));
+        tvTotal.setText("Total: " + Integer.toString(cartAdapter.calTotal(cartAdapter.getCartItems()) + shipCost));
     }
 
     public void mapping() {
 
         cartAdapter = new CartAdapter(getActivity());
+        cartAdapter.setButtonListener(this::onButtonClick);
         MyDB = new DBFoody(getActivity());
         DB = new DBHelper(getActivity());
         cartItems = new ArrayList<>();
@@ -85,5 +104,11 @@ public class CartFragment extends Fragment implements IFragChange{
     @Override
     public void fragmentBecameVisible() {
         mapping();
+    }
+
+    @Override
+    public void onButtonClick(int total) {
+        mapping();
+        bind(2000, total);
     }
 }
