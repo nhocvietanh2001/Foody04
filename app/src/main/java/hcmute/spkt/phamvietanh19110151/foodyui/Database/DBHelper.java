@@ -65,9 +65,8 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("iID", invoice.getiID());
         contentValues.put("uID", invoice.getuID());
         contentValues.put("iTotalMoney", invoice.getiTotalMoney());
-        contentValues.put("listOrdered", invoice.getListOrdered());
-        contentValues.put("iTime", invoice.getiTime());
-        MyDB.insert("foods", null, contentValues);
+
+        MyDB.insert("invoice", null, contentValues);
     }
 
     public void insertCart(String name, int fid) {
@@ -112,6 +111,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public Cursor getCartByUphone(String uphone) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        return MyDB.rawQuery("Select * From cart Where uname = ?", new String[]{uphone});
+    }
 
     public Boolean checkUserAndPass(String phone, String password) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
@@ -136,5 +139,10 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("amount", amount);
         MyDB.update("cart", contentValues, "cid = ?", new String[]{Integer.toString(cid)});
+    }
+
+    public void deleteCartByID(String phone) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        MyDB.delete("cart", "uname = ?", new String[]{phone});
     }
 }

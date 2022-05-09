@@ -125,6 +125,7 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), InvoiceActivity.class);
+                intent.putExtra("voucher", voucherAmount);
                 startActivity(intent);
 
             }
