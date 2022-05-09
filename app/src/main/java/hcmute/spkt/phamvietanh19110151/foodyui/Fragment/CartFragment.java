@@ -50,6 +50,7 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
     Button btnCheckout;
     List<CartItem> cartItems;
     int shipCost, itemTotal, voucherAmount;
+    Dialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +65,6 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
         btnCheckout = view.findViewById(R.id.btnCheckOut);
         tvVoucher = view.findViewById(R.id.tvVoucherCart);
 
-
         mapping();
 
         shipCost = 2000;
@@ -75,7 +75,7 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
         imgVoucher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(getActivity());
+                dialog = new Dialog(getActivity());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_voucher);
 
@@ -128,7 +128,8 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
         this.shipCost = shipCost;
         tvItemTotal.setText("Item Total: " + Integer.toString(itemTotal));
         tvDeliveryServices.setText("Ship cost: " + Integer.toString(shipCost));
-        tvTotal.setText("Total: " + Integer.toString(cartAdapter.calTotal(cartAdapter.getCartItems()) + shipCost));
+        tvTotal.setText("Total: " + Integer.toString(itemTotal + shipCost - voucherAmount));
+
     }
 
     public void bindVoucher(String type, int value) {
@@ -140,7 +141,8 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
         }
         if (type.equals("VND")) {
             tvVoucher.setVisibility(View.VISIBLE);
-            tvVoucher.setText("Voucher Amount: -" + Integer.toString(itemTotal - value));
+            voucherAmount = value;
+            tvVoucher.setText("Voucher Amount: -" + Integer.toString(value));
             return;
         }
     }
@@ -188,5 +190,7 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
 
     public void onVoucherClick(String type, int value) {
         bindVoucher(type, value);
+        bind(shipCost, itemTotal);
+        dialog.dismiss();
     }
 }
