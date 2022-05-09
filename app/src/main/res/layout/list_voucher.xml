@@ -6,7 +6,7 @@
     android:background="@drawable/voucherborder"
     android:layout_weight="10"
     android:padding="10dp"
-    tools:context=".Fragment.VoucherFragment">
+    android:id="@+id/layoutVoucher">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
