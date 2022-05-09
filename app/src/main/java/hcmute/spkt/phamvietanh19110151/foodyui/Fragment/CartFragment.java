@@ -1,10 +1,13 @@
 package hcmute.spkt.phamvietanh19110151.foodyui.Fragment;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,9 +16,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,22 +31,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.CartAdapter;
+import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.VoucherAdapter;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.CartItem;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Voucher;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
-public class CartFragment extends Fragment implements IFragChange, CartAdapter.ButtonListener{
+public class CartFragment extends Fragment implements IFragChange, CartAdapter.ButtonListener, VoucherAdapter.voucherOnClick{
 
-    public static RecyclerView rcvOrdered;
-    public static CartAdapter cartAdapter;
+    RecyclerView rcvOrdered;
+    CartAdapter cartAdapter;
     DBFoody MyDB;
     DBHelper DB;
     TextView tvItemTotal, tvDeliveryServices, tvTotal, tvVoucher;
     ImageView imgVoucher;
     Button btnCheckout;
     List<CartItem> cartItems;
+    int shipCost, itemTotal, voucherAmount;
+    Dialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,24 +61,90 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
         tvItemTotal = view.findViewById(R.id.txtViewItemTotal);
         tvDeliveryServices = view.findViewById(R.id.txtViewShipCost);
         tvTotal = view.findViewById(R.id.txtViewTotal);
-        imgVoucher = view.findViewById(R.id.imgFood);
+        imgVoucher = view.findViewById(R.id.imgVoucher);
         btnCheckout = view.findViewById(R.id.btnCheckOut);
         tvVoucher = view.findViewById(R.id.tvVoucherCart);
 
         mapping();
 
-        int shipCost = 2000;
-        int itemTotal = cartAdapter.calTotal(cartAdapter.getCartItems());
+        shipCost = 2000;
+        itemTotal = cartAdapter.calTotal(cartAdapter.getCartItems());
 
         bind(shipCost, itemTotal);
+
+        imgVoucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_voucher);
+
+                Window window = dialog.getWindow();
+                if (window == null)
+                    return;
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                WindowManager.LayoutParams windowAttributes = window.getAttributes();
+                windowAttributes.gravity = Gravity.BOTTOM;
+                window.setAttributes(windowAttributes);
+
+                dialog.setCancelable(true);
+
+                RecyclerView rcvVoucher = dialog.findViewById(R.id.rcvVoucherDialog);
+                Button btnCancel = dialog.findViewById(R.id.btnCancelVoucher);
+                VoucherAdapter adapter = new VoucherAdapter(getActivity());
+                adapter.setVoucherOnClick(CartFragment.this::onVoucherClick);
+                List<Voucher> vouchers = new ArrayList<>();
+
+                Cursor voucherData = MyDB.getVouchers();
+                while (voucherData.moveToNext()) {
+                    String name = voucherData.getString(1);
+                    String type = voucherData.getString(2);
+                    int amount = voucherData.getInt(3);
+                    vouchers.add(new Voucher(name, type, amount));
+                }
+                adapter.setVouchers(vouchers);
+                rcvVoucher.setAdapter(adapter);
+                LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity());
+                rcvVoucher.setLayoutManager(linearLayoutManager1);
+
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+            }
+        });
 
         return view;
     }
 
     public void bind(int shipCost, int itemTotal) {
+        this.itemTotal = itemTotal;
+        this.shipCost = shipCost;
         tvItemTotal.setText("Item Total: " + Integer.toString(itemTotal));
         tvDeliveryServices.setText("Ship cost: " + Integer.toString(shipCost));
-        tvTotal.setText("Total: " + Integer.toString(cartAdapter.calTotal(cartAdapter.getCartItems()) + shipCost));
+        tvTotal.setText("Total: " + Integer.toString(itemTotal + shipCost - voucherAmount));
+
+    }
+
+    public void bindVoucher(String type, int value) {
+        if (type.equals("percent")) {
+            tvVoucher.setVisibility(View.VISIBLE);
+            voucherAmount = itemTotal / 100 * value;
+            tvVoucher.setText("Voucher Amount: -" + Integer.toString(itemTotal - voucherAmount));
+            return;
+        }
+        if (type.equals("VND")) {
+            tvVoucher.setVisibility(View.VISIBLE);
+            voucherAmount = value;
+            tvVoucher.setText("Voucher Amount: -" + Integer.toString(value));
+            return;
+        }
     }
 
     public void mapping() {
@@ -110,5 +186,11 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
     public void onButtonClick(int total) {
         mapping();
         bind(2000, total);
+    }
+
+    public void onVoucherClick(String type, int value) {
+        bindVoucher(type, value);
+        bind(shipCost, itemTotal);
+        dialog.dismiss();
     }
 }
