@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
-import hcmute.spkt.phamvietanh19110151.foodyui.Model.Invoice;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Restaurant;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Voucher;
 
@@ -140,17 +139,7 @@ public class DBFoody extends SQLiteOpenHelper {
         contentValues.put("rid", rid);
         MyDB.insert("foods", null, contentValues);
     }
-    public void insertInvoice(Invoice invoice){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
 
-        contentValues.put("iID", invoice.getiID());
-        contentValues.put("uID", invoice.getuID());
-        contentValues.put("iTotalMoney", invoice.getiTotalMoney());
-        contentValues.put("listOrdered", invoice.getListOrdered());
-        contentValues.put("iTime", invoice.getiTime());
-        MyDB.insert("foods", null, contentValues);
-    }
     public Cursor getVouchers() {
         SQLiteDatabase MyDB = this.getReadableDatabase();
         return MyDB.rawQuery("SELECT * FROM vouchers", null);
