@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="26/22 Duong Pham Ngu Lao Di An BD"
-        android:textSize="30dp"
+        android:textSize="18dp"
         android:textColor="@color/green"
         android:id="@+id/tvInvoiceCustomerAddress"
         android:layout_marginTop="10dp"
@@ -139,14 +139,16 @@
         android:weightSum="2"
         >
         <Button
+            android:id="@+id/btnAcptInvoice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#17BD1C"
-            android:text="Accept to payment"
+            android:text="Accept payment"
             android:layout_weight="1"
             android:textSize="13dp"
             />
         <Button
+            android:id="@+id/btnDeclInvoice"
             android:layout_width="0dp"
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
