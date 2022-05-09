@@ -6,6 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.CartItem;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -94,6 +99,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+
     public Boolean checkUserAndPass(String phone, String password) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from users where uphone = ? and upass = ?", new String[]{phone, password});
@@ -102,5 +108,20 @@ public class DBHelper extends SQLiteOpenHelper {
         } else {
             return false;
         }
+    }
+
+    public Cursor getCart() {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        return MyDB.rawQuery("Select * from cart", null);
+    }
+
+    public void updateAmount(int cid, int amount) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        if (amount == 0) {
+            MyDB.delete("cart", "cid = ?", new String[]{Integer.toString(cid)});
+        }
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("amount", amount);
+        MyDB.update("cart", contentValues, "cid = ?", new String[]{Integer.toString(cid)});
     }
 }

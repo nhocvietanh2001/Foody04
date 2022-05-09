@@ -1,5 +1,6 @@
 package hcmute.spkt.phamvietanh19110151.foodyui.Fragment;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,14 +14,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.CartAdapter;
+import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
+import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.CartItem;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
 public class CartFragment extends Fragment {
 
-    RecyclerView rcvOrdered;
+    public static RecyclerView rcvOrdered;
+    public static CartAdapter cartAdapter;
+    DBFoody MyDB;
+    DBHelper DB;
     TextView tvItemTotal, tvDeliveryServices, tvTotal;
     ImageView imgVoucher;
     Button btnCheckout;
@@ -38,7 +46,28 @@ public class CartFragment extends Fragment {
         imgVoucher = view.findViewById(R.id.imgFood);
         btnCheckout = view.findViewById(R.id.btnCheckOut);
 
+        cartAdapter = new CartAdapter(getActivity());
+        MyDB = new DBFoody(getActivity());
+        DB = new DBHelper(getActivity());
+        cartItems = new ArrayList<>();
 
+        Cursor item = DB.getCart();
+        while (item.moveToNext()) {
+            int cid = item.getInt(0);
+            int phone = item.getInt(1);
+            int fid = item.getInt(2);
+            int amount = item.getInt(3);
+            Cursor food = MyDB.getFoodsByID(fid);
+            while (food.moveToNext()) {
+                String foodName = food.getString(1);
+                int price = food.getInt(3);
+                byte[] img = food.getBlob(5);
+                cartItems.add(new CartItem(cid, foodName, phone, fid, amount, price, img));
+            }
+        }
+        cartAdapter.setItems(cartItems);
+        rcvOrdered.setAdapter(cartAdapter);
+        cartItems.clear();
 
         return view;
     }

@@ -1,6 +1,8 @@
 package hcmute.spkt.phamvietanh19110151.foodyui.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.CartItem;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
@@ -47,7 +50,36 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHo
         holder.tvAmount.setText(cartItem.getAmount());
         holder.imgFood.setImageBitmap(cartItem.getImageBitmap());
         holder.tvTotal.setText(cartItem.getTotal());
+        holder.btnGiam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int amount = Integer.parseInt(holder.tvAmount.getText().toString());
+                if(amount == 1) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Are you sure you want to delete?").setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            DBHelper MyDB = new DBHelper(context);
+                            MyDB.updateAmount(cartItem.getCid(), 0);
 
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            }
+        });
+        holder.btnTang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override

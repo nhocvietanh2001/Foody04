@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class CartItem {
+    private  int cid;
     private String foodName;
     private int uphone;
     private int fid;
@@ -11,13 +12,22 @@ public class CartItem {
     private int amount;
     private byte[] image;
 
-    public CartItem(String foodName, int uname, int fid, int amount, int price, byte[] image) {
+    public CartItem(int cid, String foodName, int uname, int fid, int amount, int price, byte[] image) {
+        this.cid = cid;
         this.foodName = foodName;
         this.uphone = uname;
         this.fid = fid;
         this.price = price;
         this.amount = amount;
         this.image = image;
+    }
+
+    public int getCid() {
+        return cid;
+    }
+
+    public void setCid(int cid) {
+        this.cid = cid;
     }
 
     public String getFoodName() {
