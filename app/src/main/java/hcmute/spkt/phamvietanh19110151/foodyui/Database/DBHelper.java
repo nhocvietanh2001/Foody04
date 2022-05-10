@@ -12,6 +12,7 @@ import java.util.List;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.CartItem;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Invoice;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.InvoiceFood;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -60,13 +61,30 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void insertInvoice(Invoice invoice){
         SQLiteDatabase MyDB = this.getWritableDatabase();
+        exec("CREATE TABLE IF NOT EXISTS invoice(iidf INTEGER primary key, iid TEXT, uname TEXT, uphone TEXT, uaddress TEXT, total TEXT, voucherAmount TEXT)");
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put("iID", invoice.getiID());
-        contentValues.put("uID", invoice.getuID());
-        contentValues.put("iTotalMoney", invoice.getiTotalMoney());
+        contentValues.put("iid", invoice.getIid());
+        contentValues.put("uname", invoice.getUname());
+        contentValues.put("uphone", invoice.getUphone());
+        contentValues.put("uaddress", invoice.getUaddress());
+        contentValues.put("total", invoice.getTotal());
+        contentValues.put("voucherAmount", invoice.getVoucherAmount());
 
         MyDB.insert("invoice", null, contentValues);
+    }
+
+    public void insertInvoiceFoods(List<InvoiceFood> invoiceFoods, String iid) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        exec("CREATE TABLE IF NOT EXISTS invoiceFood(ifid INTEGER primary key, fname TEXT, fprice TEXT, amount TEXT, iid TEXT)");
+        for (InvoiceFood item : invoiceFoods) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("fname", item.getFname());
+            contentValues.put("fprice", item.getFprice());
+            contentValues.put("amount", item.getAmount());
+            contentValues.put("iid", iid);
+            MyDB.insert("invoiceFood", null, contentValues);
+        }
     }
 
     public void insertCart(String name, int fid) {

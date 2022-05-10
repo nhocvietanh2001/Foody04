@@ -1,57 +1,79 @@
 package hcmute.spkt.phamvietanh19110151.foodyui.Model;
 
+import java.util.List;
+
 public class Invoice {
-    String iID;
-    int uID;
-    int iTotalMoney;
-    String listOrdered;
-    String iTime;
+    String iid;
+    String uname;
+    String uphone;
+    String uaddress;
+    List<InvoiceFood> invoiceFoods;
+    int total;
+    int voucherAmount;
 
-    public Invoice(String iID, int uID, int iTotalMoney, String listOrdered, String iTime) {
-        this.iID = iID;
-        this.uID = uID;
-        this.iTotalMoney = iTotalMoney;
-        this.listOrdered = listOrdered;
-        this.iTime = iTime;
+    public Invoice(String iid, String uname, String uphone, String uaddress, List<InvoiceFood> invoiceFoods, int total, int voucherAmount) {
+        this.iid = iid;
+        this.uname = uname;
+        this.uphone = uphone;
+        this.uaddress = uaddress;
+        this.invoiceFoods = invoiceFoods;
+        this.total = total;
+        this.voucherAmount = voucherAmount;
     }
 
-    public String getiID() {
-        return iID;
+    public String getIid() {
+        return iid;
     }
 
-    public void setiID(String iID) {
-        this.iID = iID;
+    public void setIid(String iid) {
+        this.iid = iid;
     }
 
-    public int getuID() {
-        return uID;
+    public int getVoucherAmount() {
+        return voucherAmount;
     }
 
-    public void setuID(int uID) {
-        this.uID = uID;
+    public void setVoucherAmount(int voucherAmount) {
+        this.voucherAmount = voucherAmount;
     }
 
-    public int getiTotalMoney() {
-        return iTotalMoney;
+    public String getUname() {
+        return uname;
     }
 
-    public void setiTotalMoney(int iTotalMoney) {
-        this.iTotalMoney = iTotalMoney;
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
-    public String getListOrdered() {
-        return listOrdered;
+    public String getUphone() {
+        return uphone;
     }
 
-    public void setListOrdered(String listOrdered) {
-        this.listOrdered = listOrdered;
+    public void setUphone(String uphone) {
+        this.uphone = uphone;
     }
 
-    public String getiTime() {
-        return iTime;
+    public String getUaddress() {
+        return uaddress;
     }
 
-    public void setiTime(String iTime) {
-        this.iTime = iTime;
+    public void setUaddress(String uaddress) {
+        this.uaddress = uaddress;
+    }
+
+    public List<InvoiceFood> getInvoiceFoods() {
+        return invoiceFoods;
+    }
+
+    public void setInvoiceFoods(List<InvoiceFood> invoiceFoods) {
+        this.invoiceFoods = invoiceFoods;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }
