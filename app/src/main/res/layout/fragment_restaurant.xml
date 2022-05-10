@@ -22,7 +22,7 @@
         android:layout_marginTop="10dp"
         android:background="@color/very_dark_green"
         android:layout_width="match_parent"
-        android:layout_height="3dp"/>
+        android:layout_height="1dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:padding="2dp"
@@ -34,7 +34,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:background="@color/very_dark_green"
-        android:layout_height="3dp"/>
+        android:layout_height="1dp"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:background="@color/very_dark_green"
-        android:layout_height="3dp"/>
+        android:layout_height="1dp"/>
 
     <SearchView
         android:id="@+id/searchfood"

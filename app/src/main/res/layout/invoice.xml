@@ -36,9 +36,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/line" />
+            android:src="#8BC34A" />
 
         <TextView
             android:id="@+id/tvInvoiceCustomerName"
@@ -52,9 +52,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/line" />
+            android:src="#8BC34A" />
 
         <TextView
             android:id="@+id/tvInvoiceCustomerPhone"
@@ -68,9 +68,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/line" />
+            android:src="#8BC34A" />
 
         <TextView
             android:id="@+id/tvInvoiceCustomerAddress"
@@ -84,9 +84,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/line" />
+            android:src="#8BC34A" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvInvoiceItems"
@@ -101,9 +101,10 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/line" />
+            android:src="#8BC34A" />
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -138,9 +139,10 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/line" />
+            android:src="#8BC34A" />
+
 
         <LinearLayout
             android:layout_width="match_parent"

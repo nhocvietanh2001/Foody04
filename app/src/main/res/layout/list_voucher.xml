@@ -6,6 +6,7 @@
     android:background="@drawable/voucherborder"
     android:layout_weight="10"
     android:padding="10dp"
+    android:layout_marginBottom="5dp"
     android:id="@+id/layoutVoucher">
 
     <!-- TODO: Update blank fragment layout -->
