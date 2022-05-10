@@ -13,12 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import hcmute.spkt.phamvietanh19110151.foodyui.Adapter.InvoiceAdapter;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBFoody;
 import hcmute.spkt.phamvietanh19110151.foodyui.Database.DBHelper;
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.CartFragment;
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.IFragChange;
+import hcmute.spkt.phamvietanh19110151.foodyui.Fragment.IFragReturn;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.CartItem;
+import hcmute.spkt.phamvietanh19110151.foodyui.Model.Invoice;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.InvoiceFood;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.User;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.UserLocalStore;
@@ -79,12 +85,20 @@ public class InvoiceActivity extends AppCompatActivity {
         cNameIvc.setText(user.getName());
         cPhoneIvc.setText(user.getPhone());
         cAddressIvc.setText(user.getAddress());
-        tvInvoiceTotal.setText(Integer.toString(invoiceAdapter.calTotal()));
+        tvInvoiceTotal.setText(Integer.toString(invoiceAdapter.calTotal()- voucherAmount));
 
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DB.deleteCartByID(user.getPhone());
+                Date date = Calendar.getInstance().getTime();
+                String iid = date.toString();
+                DB.insertInvoiceFoods(invoiceFoods, iid);
+                Invoice invoice = new Invoice(iid, user.getName(), user.getName(), user.getAddress(), invoiceFoods, invoiceAdapter.calTotal(), voucherAmount);
+                DB.insertInvoice(invoice);
+                CartFragment frag = CartFragment.GetInstance();
+                frag.change();
+                finish();
                 Toast.makeText(InvoiceActivity.this, "Checkout Successful!", Toast.LENGTH_SHORT).show();
             }
         });

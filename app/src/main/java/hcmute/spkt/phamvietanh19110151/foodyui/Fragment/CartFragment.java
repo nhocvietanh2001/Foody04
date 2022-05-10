@@ -40,7 +40,7 @@ import hcmute.spkt.phamvietanh19110151.foodyui.Model.Food;
 import hcmute.spkt.phamvietanh19110151.foodyui.Model.Voucher;
 import hcmute.spkt.phamvietanh19110151.foodyui.R;
 
-public class CartFragment extends Fragment implements IFragChange, CartAdapter.ButtonListener, VoucherAdapter.voucherOnClick{
+public class CartFragment extends Fragment implements IFragChange, CartAdapter.ButtonListener, VoucherAdapter.voucherOnClick {
 
     RecyclerView rcvOrdered;
     CartAdapter cartAdapter;
@@ -52,10 +52,13 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
     List<CartItem> cartItems;
     int shipCost, itemTotal, voucherAmount;
     Dialog dialog;
+    private static CartFragment instance;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        instance = this;
+
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
         rcvOrdered = view.findViewById(R.id.listOrdered);
@@ -156,6 +159,8 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
             tvVoucher.setText("Voucher Amount: -" + Integer.toString(value));
             return;
         }
+        tvVoucher.setVisibility(View.GONE);
+        voucherAmount = value;
     }
 
     public void mapping() {
@@ -191,6 +196,8 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
     @Override
     public void fragmentBecameVisible() {
         mapping();
+        itemTotal = cartAdapter.calTotal(cartAdapter.getCartItems());
+        bind(2000, itemTotal);
     }
 
     @Override
@@ -203,5 +210,16 @@ public class CartFragment extends Fragment implements IFragChange, CartAdapter.B
         bindVoucher(type, value);
         bind(shipCost, itemTotal);
         dialog.dismiss();
+    }
+
+    public static CartFragment GetInstance()
+    {
+        return instance;
+    }
+
+    public void change() {
+        mapping();
+        bindVoucher("", 0);
+        bind(2000, 0);
     }
 }
